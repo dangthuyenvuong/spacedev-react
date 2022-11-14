@@ -1,11 +1,13 @@
-import {Fragment} from 'react'
+// src/components/Box/index.jsx
 
-export function Box(){
-    return <>
+export function Box(props){
+    console.log(props)
+    return [
         <div
+            key={1}
             className="box"
             style={{
-                background: 'red',
+                background: props.background,
                 color: 'white',
                 width: 400,
                 height: 400,
@@ -15,13 +17,8 @@ export function Box(){
                 fontSize: 50
             }}
         >
-            Box
-        </div>
-        <div>ABC</div>
-    </>
+            {props.text}
+        </div>,
+        <div key={2}>ABC</div>
+    ]
 }
-// jsx -> javascript xml
-export const A = 1
-
-export default Box
-
