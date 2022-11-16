@@ -125,7 +125,7 @@ export const Count = (props) => {
         <div style={{ height: 10000 }}>
             <CountStyle style={{ background: props.background }}>
                 <CountButtonStyle onClick={onDecre}>-</CountButtonStyle>
-                <div className="count">{count.num}</div>
+                <div className="count">{count}</div>
                 {/* <div>
                 {JSON.stringify(user)}
             </div> */}
