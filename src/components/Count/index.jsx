@@ -55,9 +55,7 @@ export const Count = (props) => {
 
     const [count, setCount] = useState(() => {
         // console.log('fibonaci')
-        return {
-            num: fibonaci(props.count)
-        }
+        return fibonaci(props.count)
     })
 
     const [user, setUser] = useState({
@@ -88,9 +86,7 @@ export const Count = (props) => {
     useEffect(() => {
         let timmer = setInterval(() => {
             console.log('interval', count)
-            setCount({
-                num: count.num + 1
-            })
+            setCount(count.num + 1)
         }, 1000)
 
         return () => {
