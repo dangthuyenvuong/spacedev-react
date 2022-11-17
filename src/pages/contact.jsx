@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Input from '../components/Input'
+import Field from '../components/Input'
 
 export default function Contact() {
     const [form, setForm] = useState({})
@@ -125,12 +125,12 @@ export default function Contact() {
                         việc hợp tác với các đối tác tuyển dụng và công ty trong và ngoài nước.
                     </p>
                     <form className="form" onSubmit={onSubmit}>
-                        <Input label="Họ và tên" required placeholder="Họ và tên bạn" {...register('name')}/>
-                        <Input label="Số điện thoại" required placeholder="Số điện thoại" {...register('phone')}/>
-                        <Input label="Email" required placeholder="Email của bạn" {...register('email')}/>
-                        <Input label="Website" placeholder="Đường dẫn website http://" {...register('website')}/>
-                        <Input label="Tiêu đề" required placeholder="Tiêu đề liên hệ" {...register('title')}/>
-                        <Input label="Nội dung" required renderInput={(props) => <textarea cols={30} rows={10} {...props}/>} {...register('content')}/>
+                        <Field label="Họ và tên" required placeholder="Họ và tên bạn" {...register('name')}/>
+                        <Field label="Số điện thoại" required placeholder="Số điện thoại" {...register('phone')}/>
+                        <Field label="Email" required placeholder="Email của bạn" {...register('email')}/>
+                        <Field label="Website" placeholder="Đường dẫn website http://" {...register('website')}/>
+                        <Field label="Tiêu đề" required placeholder="Tiêu đề liên hệ" {...register('title')}/>
+                        <Field label="Nội dung" required renderInput={(props) => <textarea cols={30} rows={10} {...props}/>} {...register('content')}/>
                         {/* <label>
                             <p>Họ và tên<span>*</span></p>
                             <input type="text" placeholder="Họ và tên bạn" />
