@@ -10,7 +10,7 @@ const ErrorP = styled.span`
     font-style: italic;
 `
 
-export default function Input({ label, error, required, type = 'text', renderInput, ...rest }) {
+export default function Field({ label, error, required, type = 'text', renderInput, ...rest }) {
     return (
         <label className='relative'>
             <p>{label}{required && <span>*</span>}</p>
