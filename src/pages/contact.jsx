@@ -11,10 +11,10 @@ export default function Contact() {
         const errorObject = {}
         // validate form
 
-        if(!form.name.trim()) {
+        if(!form.name?.trim()) {
             errorObject.name = 'Please fill in this field'
         }
-        if(!form.phone.trim()) {
+        if(!form.phone?.trim()) {
             errorObject.phone = 'Please fill in this field'
         }else if(!/(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(form.phone)) {
             errorObject.phone = 'please enter phone number'
@@ -23,15 +23,15 @@ export default function Contact() {
             errorObject.website = 'please enter website address'
         }
 
-        if(!form.email.trim()) {
+        if(!form.email?.trim()) {
             errorObject.email = 'Please fill in this field'
         }else if(!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(form.email)) {
             errorObject.email = 'please enter email address'
         }
-        if(!form.title.trim()) {
+        if(!form.title?.trim()) {
             errorObject.title = 'Please fill in this field'
         }
-        if(!form.content.trim()) {
+        if(!form.content?.trim()) {
             errorObject.content = 'Please fill in this field'
         }
 
