@@ -2,14 +2,7 @@ import React, { useState } from 'react'
 import Input from '../components/Input'
 
 export default function Contact() {
-    const [form, setForm] = useState({
-        name: '',
-        phone: '',
-        website: '',
-        title: '',
-        content: '',
-        email: ''
-    })
+    const [form, setForm] = useState({})
     const [error, setError] = useState({})
 
     const onSubmit = (ev) => {
@@ -54,7 +47,7 @@ export default function Contact() {
     const register = (name) => {
         return {
             error: error[name],
-            value: form[name],
+            value: form[name] || '',
             onChange: (ev) => setForm({...form, [name]: ev.target.value}) 
         }
     }
