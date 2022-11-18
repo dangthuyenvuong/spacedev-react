@@ -11,6 +11,7 @@ import Project from './pages/project'
 import FAQ from './pages/faq'
 import Payment from './pages/payment'
 import Coin from './pages/coin'
+import Page404 from './pages/404'
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path='/faq' element={<FAQ />} />
         <Route path='/payment' element={<Payment />} />
         <Route path='/coin' element={<Coin />} />
+        <Route path='*' element={<Page404 />} />
       </Routes>
 
       <Footer />
