@@ -31,7 +31,9 @@ function App() {
       <Route element={<MainLayout />}>
         <Route index element={<Home />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path='/course' element={<Course />} />
+        <Route path='/course'>
+          <Route index element={<Course />} />
+        </Route>
         <Route path='/team' element={<Team />} />
         <Route path='/project' element={<Project />} />
         <Route path='/faq' element={<FAQ />} />
