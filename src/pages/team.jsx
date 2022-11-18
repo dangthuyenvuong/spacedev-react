@@ -13,7 +13,7 @@ export default function Team() {
                         <div className="item col-md-6 col-sm-6">
                             <div className="wrap">
                                 <div className="cover">
-                                    <img src="img/thumb-member.jpg" alt="" />
+                                    <img src="img/avt.png" alt="" />
                                 </div>
                                 <div className="info">
                                     <div className="name">
@@ -26,7 +26,7 @@ export default function Team() {
                         <div className="item col-md-6 col-sm-6">
                             <div className="wrap">
                                 <div className="cover">
-                                    <img src="img/thumb-member.jpg" alt="" />
+                                    <img src="img/avt.png" alt="" />
                                 </div>
                                 <div className="info">
                                     <div className="name">
@@ -39,7 +39,7 @@ export default function Team() {
                         <div className="item col-md-6 col-sm-6">
                             <div className="wrap">
                                 <div className="cover">
-                                    <img src="img/thumb-member.jpg" alt="" />
+                                    <img src="img/avt.png" alt="" />
                                 </div>
                                 <div className="info">
                                     <div className="name">
@@ -52,7 +52,7 @@ export default function Team() {
                         <div className="item col-md-6 col-sm-6">
                             <div className="wrap">
                                 <div className="cover">
-                                    <img src="img/thumb-member.jpg" alt="" />
+                                    <img src="img/avt.png" alt="" />
                                 </div>
                                 <div className="info">
                                     <div className="name">
@@ -66,7 +66,7 @@ export default function Team() {
                             <div className="wrap">
                                 <div className="cover">
                                     <span className="text">H</span>
-                                    <img src="img/thumb-member.jpg" alt="" />
+                                    <img src="img/avt.png" alt="" />
                                 </div>
                                 <div className="info">
                                     <div className="name">
@@ -79,7 +79,7 @@ export default function Team() {
                         <div className="item col-md-3 col-sm-4 col-xs-6">
                             <div className="wrap">
                                 <div className="cover">
-                                    <img src="img/thumb-member.jpg" alt="" />
+                                    <img src="img/avt.png" alt="" />
                                 </div>
                                 <div className="info">
                                     <div className="name">
@@ -92,7 +92,7 @@ export default function Team() {
                         <div className="item col-md-3 col-sm-4 col-xs-6">
                             <div className="wrap">
                                 <div className="cover">
-                                    <img src="img/thumb-member.jpg" alt="" />
+                                    <img src="img/avt.png" alt="" />
                                 </div>
                                 <div className="info">
                                     <div className="name">
@@ -105,7 +105,7 @@ export default function Team() {
                         <div className="item col-md-3 col-sm-4 col-xs-6">
                             <div className="wrap">
                                 <div className="cover">
-                                    <img src="img/thumb-member.jpg" alt="" />
+                                    <img src="img/avt.png" alt="" />
                                 </div>
                                 <div className="info">
                                     <div className="name">
@@ -118,7 +118,7 @@ export default function Team() {
                         <div className="item col-md-3 col-sm-4 col-xs-6">
                             <div className="wrap">
                                 <div className="cover">
-                                    <img src="img/thumb-member.jpg" alt="" />
+                                    <img src="img/avt.png" alt="" />
                                 </div>
                                 <div className="info">
                                     <div className="name">
@@ -131,7 +131,7 @@ export default function Team() {
                         <div className="item col-md-3 col-sm-4 col-xs-6">
                             <div className="wrap">
                                 <div className="cover">
-                                    <img src="img/thumb-member.jpg" alt="" />
+                                    <img src="img/avt.png" alt="" />
                                 </div>
                                 <div className="info">
                                     <div className="name">
@@ -144,7 +144,7 @@ export default function Team() {
                         <div className="item col-md-3 col-sm-4 col-xs-6">
                             <div className="wrap">
                                 <div className="cover">
-                                    <img src="img/thumb-member.jpg" alt="" />
+                                    <img src="img/avt.png" alt="" />
                                 </div>
                                 <div className="info">
                                     <div className="name">

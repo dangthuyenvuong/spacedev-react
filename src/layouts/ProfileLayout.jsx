@@ -1,7 +1,9 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
+import { PATH } from '../config/path'
 
 export default function ProfileLayout() {
+
     return (
         <main className="profile" id="main">
             <section>
@@ -17,11 +19,11 @@ export default function ProfileLayout() {
                 <div className="container">
                     <div className="tab">
                         <div className="tab-title">
-                            <a onClick={(ev) => onChangeTab(ev, 0)} href="#" className="active">Thông tin tài khoản</a>
-                            <a onClick={(ev) => onChangeTab(ev, 1)} href="#">Khóa học của bạn</a>
-                            <a onClick={(ev) => onChangeTab(ev, 2)} href="#">Dự án đã làm</a>
-                            <a onClick={(ev) => onChangeTab(ev, 3)} href="#">Lịch sử thanh toán</a>
-                            <a onClick={(ev) => onChangeTab(ev, 4)} href="#">Quản lý COIN của tôi</a>
+                            <NavLink end to={PATH.profile.index} >Thông tin tài khoản</NavLink>
+                            <NavLink to={PATH.profile.course}>Khóa học của bạn</NavLink>
+                            <NavLink to={PATH.profile.project}>Dự án đã làm</NavLink>
+                            <NavLink to={PATH.profile.payment}>Lịch sử thanh toán</NavLink>
+                            <NavLink to={PATH.profile.coin}>Quản lý COIN của tôi</NavLink>
                         </div>
                         <div className="tab-content">
                             <Outlet />

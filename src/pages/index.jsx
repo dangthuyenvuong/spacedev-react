@@ -1,6 +1,7 @@
-import React from 'react'
+import { useScrollTop } from '../hooks/useScrollTop'
 
 export default function Home() {
+    useScrollTop()
     return (
         <main className="homepage" id="main">
             <div className="banner jarallax">

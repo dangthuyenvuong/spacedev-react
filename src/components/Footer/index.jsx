@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { PATH } from '../../config/path'
 
 export default function Footer() {
     return (
@@ -12,31 +14,31 @@ export default function Footer() {
                         </p>
                         <p className="phone">(+84) 949 816 596</p>
                         <div className="social">
-                            <a href="#">
+                            <Link to="#">
                                 <img src="/img/fb-icon.png" alt="" />
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                                 <img src="/img/email-icon.png" alt="" />
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                                 <img src="/img/skype-icon.png" alt="" />
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="right">
                         <nav>
                             <ul>
                                 <li>
-                                    <a href="./">Trang chủ</a>
+                                    <Link to={PATH.home}>Trang chủ</Link>
                                 </li>
                                 <li>
-                                    <a href="./course-list.html">Khóa Học</a>
+                                    <Link to="./course-list.html">Khóa Học</Link>
                                 </li>
                                 <li>
-                                    <a href="#">Thanh toán</a>
+                                    <Link to={PATH.payment}>Thanh toán</Link>
                                 </li>
                                 <li>
-                                    <a href="#">Điều khoản</a>
+                                    <Link to="#">Điều khoản</Link>
                                 </li>
                             </ul>
                         </nav>
