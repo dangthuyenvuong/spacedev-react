@@ -47,7 +47,7 @@ export default function Home() {
                                         </div>
                                         <div className="name">Vương Đặng</div>
                                     </div>
-                                    <div className="register-btn">Đăng Ký</div>
+                                    <a href="/register.html" className="register-btn">Đăng Ký</a>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@ export default function Home() {
                                         </div>
                                         <div className="name">Vương Đặng</div>
                                     </div>
-                                    <div className="register-btn">Đăng Ký</div>
+                                    <a href="/register.html" className="register-btn">Đăng Ký</a>
                                 </div>
                             </div>
                         </div>
@@ -95,7 +95,7 @@ export default function Home() {
                                         </div>
                                         <div className="name">Vương Đặng</div>
                                     </div>
-                                    <div className="register-btn">Đăng Ký</div>
+                                    <a href="/register.html" className="register-btn">Đăng Ký</a>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@ export default function Home() {
                                         </div>
                                         <div className="name">Vương Đặng</div>
                                     </div>
-                                    <div className="register-btn">Đăng Ký</div>
+                                    <a href="/register.html" className="register-btn">Đăng Ký</a>
                                 </div>
                             </div>
                         </div>
@@ -143,7 +143,7 @@ export default function Home() {
                                         </div>
                                         <div className="name">Vương Đặng</div>
                                     </div>
-                                    <div className="register-btn">Đăng Ký</div>
+                                    <a href="/register.html" className="register-btn">Đăng Ký</a>
                                 </div>
                             </div>
                         </div>

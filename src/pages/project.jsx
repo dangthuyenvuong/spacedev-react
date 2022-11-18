@@ -7,8 +7,7 @@ export default function Project() {
                 <div className="container">
                     <h2 className="main-title">dự án</h2>
                     <p className="top-des">
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit. aliquam tincidunt elementum sem non
-                        luctus
+                    Đây là những dự án do học viên hoàn thành trong các khóa học. Những dự án hoàn toàn đạt tiêu chuẩn để làm trong các công ty công nghệ.
                     </p>
                     <div className="list row">
                         <a href="#" className="item col-md-6">

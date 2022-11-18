@@ -12,6 +12,9 @@ import FAQ from './pages/faq'
 import Payment from './pages/payment'
 import Coin from './pages/coin'
 import Page404 from './pages/404'
+import Signin from './pages/signin'
+import Signup from './pages/signup'
+import ResetPassword from './pages/reset-password'
 
 
 function App() {
@@ -29,6 +32,9 @@ function App() {
         <Route path='/faq' element={<FAQ />} />
         <Route path='/payment' element={<Payment />} />
         <Route path='/coin' element={<Coin />} />
+        <Route path='/signin' element={<Signin />} />
+        <Route path='/signup' element={<Signup />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
         <Route path='*' element={<Page404 />} />
       </Routes>
 

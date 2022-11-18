@@ -7,10 +7,7 @@ export default function Team() {
                 <div className="container">
                     <div className="top">
                         <h2 className="main-title">Spacedev team</h2>
-                        <p className="top-des">Lorem ipsum dolor sit amet consectetur adipiscing elit. aliquam tincidunt
-                            elementum
-                            sem non luctus
-                        </p>
+                        <p className="top-des">Những thành viên founder và các bạn học viên đã đồng hành cùng spacedev để tạo ra môi trường phát triển spacedev platform như ngày hôm nay</p>
                     </div>
                     <div className="list row">
                         <div className="item col-md-6 col-sm-6">
