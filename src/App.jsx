@@ -10,21 +10,26 @@ import Register from './pages/register'
 import Project from './pages/project'
 import FAQ from './pages/faq'
 import Payment from './pages/payment'
-import Coin from './pages/coin'
 import Page404 from './pages/404'
 import Signin from './pages/signin'
 import Signup from './pages/signup'
 import ResetPassword from './pages/reset-password'
+import Profile from './pages/profile/profile'
+import MyCourse from './pages/profile/course'
+import Coin from './pages/profile/coin'
+import ProfileLayout from './layouts/ProfileLayout'
+import MyProject from './pages/profile/project'
+import MyPayment from './pages/profile/payment'
+import MainLayout from './layouts/MainLayout'
 
 
 function App() {
 
 
   return (
-    <>
-      <Header />
-      <Routes>
-        <Route path='/' element={<Home />} />
+    <Routes>
+      <Route element={<MainLayout />}>
+        <Route index element={<Home />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/course' element={<Course />} />
         <Route path='/team' element={<Team />} />
@@ -34,12 +39,17 @@ function App() {
         <Route path='/coin' element={<Coin />} />
         <Route path='/signin' element={<Signin />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/profile' element={<ProfileLayout />}>
+          <Route index element={<Profile />} />
+          <Route path="/profile/course" element={<MyCourse />} />
+          <Route path="/profile/coin" element={<Coin />} />
+          <Route path="/profile/project" element={<MyProject />} />
+          <Route path="/profile/payment" element={<MyPayment />} />
+        </Route>
         <Route path='/reset-password' element={<ResetPassword />} />
         <Route path='*' element={<Page404 />} />
-      </Routes>
-
-      <Footer />
-    </>
+      </Route>
+    </Routes>
   )
 }
 
