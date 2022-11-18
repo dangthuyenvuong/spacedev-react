@@ -21,6 +21,7 @@ import ProfileLayout from './layouts/ProfileLayout'
 import MyProject from './pages/profile/project'
 import MyPayment from './pages/profile/payment'
 import MainLayout from './layouts/MainLayout'
+import { PATH } from './config/path'
 
 
 function App() {
@@ -30,23 +31,23 @@ function App() {
     <Routes>
       <Route element={<MainLayout />}>
         <Route index element={<Home />} />
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/course' element={<Course />} />
-        <Route path='/team' element={<Team />} />
-        <Route path='/project' element={<Project />} />
-        <Route path='/faq' element={<FAQ />} />
-        <Route path='/payment' element={<Payment />} />
-        <Route path='/coin' element={<Coin />} />
-        <Route path='/signin' element={<Signin />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/profile' element={<ProfileLayout />}>
+        <Route path={PATH.contact} element={<Contact />} />
+        <Route path={PATH.course} element={<Course />} />
+        <Route path={PATH.team} element={<Team />} />
+        <Route path={PATH.project} element={<Project />} />
+        <Route path={PATH.faq} element={<FAQ />} />
+        <Route path={PATH.payment} element={<Payment />} />
+        <Route path={PATH.coin} element={<Coin />} />
+        <Route path={PATH.signin} element={<Signin />} />
+        <Route path={PATH.signup} element={<Signup />} />
+        <Route path={PATH.resetPassword} element={<ResetPassword />} />
+        <Route path={PATH.profile.index} element={<ProfileLayout />}>
           <Route index element={<Profile />} />
-          <Route path="/profile/course" element={<MyCourse />} />
-          <Route path="/profile/coin" element={<Coin />} />
-          <Route path="/profile/project" element={<MyProject />} />
-          <Route path="/profile/payment" element={<MyPayment />} />
+          <Route path={PATH.profile.course} element={<MyCourse />} />
+          <Route path={PATH.profile.coin} element={<Coin />} />
+          <Route path={PATH.profile.project} element={<MyProject />} />
+          <Route path={PATH.profile.payment} element={<MyPayment />} />
         </Route>
-        <Route path='/reset-password' element={<ResetPassword />} />
         <Route path='*' element={<Page404 />} />
       </Route>
     </Routes>
