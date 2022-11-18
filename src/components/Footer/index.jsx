@@ -10,7 +10,7 @@ export default function Footer() {
                         <p className="address">
                             Tòa nhà Robot, 308, Điện Biên Phủ, Phường 4, Quận 3, TP. Hồ Chí Minh
                         </p>
-                        <p className="phone">(+84) 98 9596 913</p>
+                        <p className="phone">(+84) 949 816 596</p>
                         <div className="social">
                             <a href="#">
                                 <img src="img/fb-icon.png" alt="" />
