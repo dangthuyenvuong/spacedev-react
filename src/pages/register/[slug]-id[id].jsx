@@ -9,7 +9,7 @@ import { useScrollTop } from '../../hooks/useScrollTop'
 export default function Register() {
     const { id } = useParams()
     const [detail, setDetail] = useState()
-    useScrollTop(id)
+    useScrollTop([id])
 
     useEffect(() => {
         let course = courseService.getCourseDetail(parseInt(id))

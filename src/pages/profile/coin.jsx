@@ -52,7 +52,7 @@ export default function Coin() {
                         </label>
                         <small><i>*Bạn có thể đổi COIN 1 lần</i></small>
                     </div>
-                    <a href="javascript:void(0)" className="btn main">Đổi COIN</a>
+                    <a href="#" className="btn main">Đổi COIN</a>
                 </div>
             </div>
             <div className="coinhistory">
