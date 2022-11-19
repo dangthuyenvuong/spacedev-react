@@ -1,8 +1,32 @@
 import React from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { PATH } from '../config/path'
 
-export default function Signin() {
+
+/**
+ * Navigate là component, khi Navigate được render, page sẽ được redirect sang page khác dựa theo Navigate
+ * Thường dùng để bảo vệ 1 router khi người dùng chưa được phép (bảo vệ link account)
+ * 
+ * useNavigate là 1 hook return về navigate method, sử dụng useNavigate khi bạn muốn
+ * chuyển tới 1 url trong một action nào đó
+ * Thường dùng để chuyển link khi thực hiện xong 1 action (Login thành công)
+ * 
+ * PublicRoute: anyone can access
+ * PrivateRoute: login user can access
+ * AuthRoute: has not logged in yet
+ */
+
+export default function Signin({ login }) {
+    console.log('Signin re-render')
+    const navigate = useNavigate()
+    const _onLogin = () => {
+        login()
+        navigate(PATH.profile.index)
+    }
+
+
     return (
-        <main class="auth" id="main">
+        <main className="auth" id="main">
             <div className="wrap">
                 {/* login-form */}
                 <div className="ct_login" >
@@ -18,7 +42,7 @@ export default function Signin() {
                         </label>
                         <a href="#" className="forget">Quên mật khẩu?</a>
                     </div>
-                    <button className="btn rect main btn-login">đăng nhập</button>
+                    <button onClick={_onLogin} className="btn rect main btn-login">đăng nhập</button>
                     <div className="text-register" style={{}}>
                         <span>Nếu bạn chưa có tài khoản?</span> <a className="link" href="#">Đăng ký</a>
                     </div>

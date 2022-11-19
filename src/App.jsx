@@ -1,5 +1,8 @@
+import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import './assets/css/taildwin.css'
+import { PrivateRoute } from './components/PrivateRoute'
+import { AuthRoute } from './components/AuthRoute'
 import { PATH } from './config/path'
 import MainLayout from './layouts/MainLayout'
 import ProfileLayout from './layouts/ProfileLayout'
@@ -25,10 +28,17 @@ import Team from './pages/team'
 
 function App() {
 
+  const [user, setUser] = useState()
+  const login = () => {
+    setUser({
+      name: 'Dang Thuyen Vuong',
+      avatar: '/img/avt.png'
+    })
+  }
 
   return (
     <Routes>
-      <Route element={<MainLayout />}>
+      <Route element={<MainLayout user={user} />}>
         <Route index element={<Home />} />
         <Route path={PATH.contact} element={<Contact />} />
         <Route path={PATH.course}>
@@ -41,15 +51,21 @@ function App() {
         <Route path={PATH.faq} element={<FAQ />} />
         <Route path={PATH.payment} element={<Payment />} />
         <Route path={PATH.coin} element={<Coin />} />
-        <Route path={PATH.signin} element={<Signin />} />
-        <Route path={PATH.signup} element={<Signup />} />
-        <Route path={PATH.resetPassword} element={<ResetPassword />} />
-        <Route path={PATH.profile.index} element={<ProfileLayout />}>
-          <Route index element={<Profile />} />
-          <Route path={PATH.profile.course} element={<MyCourse />} />
-          <Route path={PATH.profile.coin} element={<Coin />} />
-          <Route path={PATH.profile.project} element={<MyProject />} />
-          <Route path={PATH.profile.payment} element={<MyPayment />} />
+
+        <Route element={<AuthRoute redirect={PATH.profile.index} user={user} />}>
+          <Route path={PATH.signin} element={<Signin login={login} />} />
+          <Route path={PATH.signup} element={<Signup register={login} />} />
+          <Route path={PATH.resetPassword} element={<ResetPassword />} />
+        </Route>
+
+        <Route element={<PrivateRoute redirect={PATH.signin} user={user} />}>
+          <Route path={PATH.profile.index} element={<ProfileLayout user={user} />}>
+            <Route index element={<Profile />} />
+            <Route path={PATH.profile.course} element={<MyCourse />} />
+            <Route path={PATH.profile.coin} element={<Coin />} />
+            <Route path={PATH.profile.project} element={<MyProject />} />
+            <Route path={PATH.profile.payment} element={<MyPayment />} />
+          </Route>
         </Route>
         <Route path='*' element={<Page404 />} />
       </Route>

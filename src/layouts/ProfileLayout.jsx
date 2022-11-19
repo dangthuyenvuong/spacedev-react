@@ -1,8 +1,8 @@
 import React from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import { Navigate, NavLink, Outlet } from 'react-router-dom'
 import { PATH } from '../config/path'
 
-export default function ProfileLayout() {
+export default function ProfileLayout({ user }) {
 
     return (
         <main className="profile" id="main">
@@ -10,10 +10,10 @@ export default function ProfileLayout() {
                 <div className="top-info">
                     <div className="avatar">
                         {/* <span class="text">H</span> */}
-                        <img src="/img/avt.png" alt="" />
+                        <img src={user.avatar} alt="" />
                         <div className="camera" />
                     </div>
-                    <div className="name">Vương Đặng</div>
+                    <div className="name">{user.name}</div>
                     <p className="des">Thành viên của team Spacedev1-OFFLINE</p>
                 </div>
                 <div className="container">

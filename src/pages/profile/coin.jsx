@@ -1,8 +1,12 @@
 import React from 'react'
+import { Navigate } from 'react-router-dom'
 
 export default function Coin() {
+    const user = true
+    if(!user) return <Navigate to="/"/> 
+
     return (
-        <div className="tab5 cointab" style={{ display: 'block' }}>
+        <div className="tab5 cointab" >
             <div className="coininfo">
                 <div className="coininfo__box">
                     <h3><strong>Thông tin COIN</strong></h3>

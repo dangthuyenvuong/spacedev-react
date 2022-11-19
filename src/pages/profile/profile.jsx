@@ -14,7 +14,7 @@ export default function Profile() {
             </label>
             <label>
                 <p>Email<span>*</span></p>
-                <input defaultValue="vuong.dang@dna.vn" disabled type="text" />
+                <input defaultValue="dangthuyenvuong@gmail.com" disabled type="text" />
             </label>
             <label>
                 <p>Facebook<span>*</span></p>
