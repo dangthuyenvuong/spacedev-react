@@ -10,7 +10,8 @@ import Course from './pages/course'
 import CourseDetail from './pages/course/[slug]-id[id]'
 import FAQ from './pages/faq'
 import Payment from './pages/payment'
-import Coin from './pages/profile/coin'
+import Coin from './pages/coin'
+import MyCoin from './pages/profile/coin'
 import MyCourse from './pages/profile/course'
 import MyPayment from './pages/profile/payment'
 import Profile from './pages/profile/profile'
@@ -47,7 +48,7 @@ function App() {
         <Route path={PATH.profile.index} element={<ProfileLayout />}>
           <Route index element={<Profile />} />
           <Route path={PATH.profile.course} element={<MyCourse />} />
-          <Route path={PATH.profile.coin} element={<Coin />} />
+          <Route path={PATH.profile.coin} element={<MyCoin />} />
           <Route path={PATH.profile.project} element={<MyProject />} />
           <Route path={PATH.profile.payment} element={<MyPayment />} />
         </Route>
