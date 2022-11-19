@@ -27,7 +27,6 @@ import { PATH } from './config/path'
 
 function App() {
 
-
   return (
     <Routes>
       <Route element={<MainLayout />}>
