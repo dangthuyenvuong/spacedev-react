@@ -1,6 +1,14 @@
+import { useState } from 'react'
+import CourseCard from '../components/CourseCard'
 import { useScrollTop } from '../hooks/useScrollTop'
+import { courseService } from '../services/course.service'
 
 export default function Home() {
+    const [courses, setCourses] = useState(() => {
+        return courseService.getCourse()
+    })
+
+
     useScrollTop()
     return (
         <main className="homepage" id="main">
@@ -28,150 +36,9 @@ export default function Home() {
                         <h2 className="main-title">OFFLINE</h2>
                     </div>
                     <div className="list row">
-                        <div className="col-md-4 course">
-                            <div className="wrap">
-                                <a className="cover" href="./course-detail.html">
-                                    <img src="./img/img1.png" alt="" />
-                                </a>
-                                <div className="info">
-                                    <a className="name" href="./course-detail.html">
-                                        Reactjs Advanced
-                                    </a>
-                                    <p className="des">
-                                        One of the best corporate fashion brands in Sydney
-                                    </p>
-                                </div>
-                                <div className="bottom">
-                                    <div className="teacher">
-                                        <div className="avatar">
-                                            <img src="img/avt.png" alt="" />
-                                        </div>
-                                        <div className="name">Vương Đặng</div>
-                                    </div>
-                                    <a href="/register.html" className="register-btn">Đăng Ký</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4 course">
-                            <div className="wrap">
-                                <a href="./course-detail.html" className="cover">
-                                    <img src="./img/img.png" alt="" />
-                                </a>
-                                <div className="info">
-                                    <a className="name" href="./course-detail.html">
-                                        React JS
-                                    </a>
-                                    <p className="des">
-                                        One of the best corporate fashion brands in Sydney
-                                    </p>
-                                </div>
-                                <div className="bottom">
-                                    <div className="teacher">
-                                        <div className="avatar">
-                                            <img src="img/avt.png" alt="" />
-                                        </div>
-                                        <div className="name">Vương Đặng</div>
-                                    </div>
-                                    <a href="/register.html" className="register-btn">Đăng Ký</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4 course">
-                            <div className="wrap">
-                                <a href="./course-detail.html" className="cover">
-                                    <img src="./img/img2.png" alt="" />
-                                </a>
-                                <div className="info">
-                                    <a className="name" href="./course-detail.html">
-                                        Devops
-                                    </a>
-                                    <p className="des">
-                                        One of the best corporate fashion brands in Sydney
-                                    </p>
-                                </div>
-                                <div className="bottom">
-                                    <div className="teacher">
-                                        <div className="avatar">
-                                            <img src="img/avt.png" alt="" />
-                                        </div>
-                                        <div className="name">Vương Đặng</div>
-                                    </div>
-                                    <a href="/register.html" className="register-btn">Đăng Ký</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4 course">
-                            <div className="wrap">
-                                <a href="./course-detail.html" className="cover">
-                                    <img src="./img/img3.png" alt="" />
-                                </a>
-                                <div className="info">
-                                    <a className="name" href="./course-detail.html">
-                                        Lập trình Nodejs
-                                    </a>
-                                    <p className="des">
-                                        One of the best corporate fashion brands in Sydney
-                                    </p>
-                                </div>
-                                <div className="bottom">
-                                    <div className="teacher">
-                                        <div className="avatar">
-                                            <img src="img/avt.png" alt="" />
-                                        </div>
-                                        <div className="name">Vương Đặng</div>
-                                    </div>
-                                    <a href="/register.html" className="register-btn">Đăng Ký</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4 course">
-                            <div className="wrap">
-                                <a href="./course-detail.html" className="cover">
-                                    <img src="./img/img4.png" alt="" />
-                                </a>
-                                <div className="info">
-                                    <a href="./course-detail.html" className="name">
-                                        HTML, CSS, JS Cơ bản
-                                    </a>
-                                    <p className="des">
-                                        One of the best corporate fashion brands in Sydney
-                                    </p>
-                                </div>
-                                <div className="bottom">
-                                    <div className="teacher">
-                                        <div className="avatar">
-                                            <img src="img/avt.png" alt="" />
-                                        </div>
-                                        <div className="name">Vương Đặng</div>
-                                    </div>
-                                    <a href="/register.html" className="register-btn">Đăng Ký</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4 course">
-                            <div className="wrap">
-                                <a href="./course-detail.html" className="cover">
-                                    <img src="./img/img5.png" alt="" />
-                                </a>
-                                <div className="info">
-                                    <a className="name" href="./course-detail.html">
-                                        Web Responsive
-                                    </a>
-                                    <p className="des">
-                                        One of the best corporate fashion brands in Sydney
-                                    </p>
-                                </div>
-                                <div className="bottom">
-                                    <div className="teacher">
-                                        <div className="avatar">
-                                            <img src="img/avt.png" alt="" />
-                                        </div>
-                                        <div className="name">Vương Đặng</div>
-                                    </div>
-                                    <a href="#" className="register-btn">Đăng Ký</a>
-                                </div>
-                            </div>
-                        </div>
+                        {
+                            courses.map(e => <CourseCard key={e.id} {...e}/>)
+                        }
                     </div>
                 </div>
             </section>

@@ -1,9 +1,20 @@
-import React, { useState } from 'react'
-import Field from '../components/Field'
-import { useForm } from '../hooks/useForm'
-import { regexp, required } from '../utils/validate'
-
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import Field from '../../components/Field'
+import { useForm } from '../../hooks/useForm'
+import { courseService } from '../../services/course.service'
+import { regexp, required } from '../../utils/validate'
+import { currency } from '../../utils/currency'
+import { useScrollTop } from '../../hooks/useScrollTop'
 export default function Register() {
+    const { id } = useParams()
+    const [detail, setDetail] = useState()
+    useScrollTop(id)
+
+    useEffect(() => {
+        let course = courseService.getCourseDetail(parseInt(id))
+        setDetail(course)
+    }, [id])
 
     const { register, validate, values } = useForm({
         email: [
@@ -33,7 +44,7 @@ export default function Register() {
         }
     }
 
-
+    if (!detail) return <div style={{margin: '100px 0'}}>...Not Found...</div>
 
     return (
         <main className="register-course" id="main">
@@ -55,11 +66,11 @@ export default function Register() {
                         <div className="container">
                             <div className="wrap container">
                                 <div className="main-sub-title">ĐĂNG KÝ</div>
-                                <h1 className="main-title">Thực chiến Reactjs Advanced </h1>
+                                <h1 className="main-title">{detail.title}</h1>
                                 <div className="main-info">
                                     <div className="date"><strong>Khai giảng:</strong> 15/11/2020</div>
                                     <div className="time"><strong>Thời lượng:</strong> 18 buổi</div>
-                                    <div className="time"><strong>Học phí:</strong> 6,000,000 VND</div>
+                                    <div className="time"><strong>Học phí:</strong> {currency(detail.money)} VND</div>
                                 </div>
                                 <div className="form">
                                     <Field label="Họ và tên" required placeholder="Họ và tên bạn" {...register('name')} />

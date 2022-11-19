@@ -8,7 +8,11 @@ export const PATH = {
     signup: '/signup',
     signin: '/signin',
     contact: '/contact',
+    courseRegister: '/register/:slug-id:id',
+    coin: '/coin',
     course: '/course',
+    courseDetail: '/course/:slug-id:id',
+    faq: '/faq',
     resetPassword: '/reset-password',
     profile: {
         index: PROFILE_PATH,
