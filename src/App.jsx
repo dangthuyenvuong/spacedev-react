@@ -13,10 +13,11 @@ import Payment from './pages/payment'
 import Page404 from './pages/404'
 import Signin from './pages/signin'
 import Signup from './pages/signup'
+import Coin from './pages/coin'
 import ResetPassword from './pages/reset-password'
 import Profile from './pages/profile/profile'
 import MyCourse from './pages/profile/course'
-import Coin from './pages/profile/coin'
+import MyCoin from './pages/profile/coin'
 import ProfileLayout from './layouts/ProfileLayout'
 import MyProject from './pages/profile/project'
 import MyPayment from './pages/profile/payment'
@@ -42,7 +43,7 @@ function App() {
         <Route path='/profile' element={<ProfileLayout />}>
           <Route index element={<Profile />} />
           <Route path="/profile/course" element={<MyCourse />} />
-          <Route path="/profile/coin" element={<Coin />} />
+          <Route path="/profile/coin" element={<MyCoin />} />
           <Route path="/profile/project" element={<MyProject />} />
           <Route path="/profile/payment" element={<MyPayment />} />
         </Route>
