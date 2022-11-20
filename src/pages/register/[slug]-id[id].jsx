@@ -6,7 +6,7 @@ import { courseService } from '../../services/course.service'
 import { regexp, required } from '../../utils/validate'
 import { currency } from '../../utils/currency'
 import { useScrollTop } from '../../hooks/useScrollTop'
-export default function Register() {
+export default function Register({ user }) {
     const { id } = useParams()
     const [detail, setDetail] = useState()
     useScrollTop(id)
@@ -16,7 +16,7 @@ export default function Register() {
         setDetail(course)
     }, [id])
 
-    const { register, validate, values } = useForm({
+    const { values, register, validate } = useForm({
         email: [
             required(),
             regexp('email', 'Xin vui lòng nhập đúng Email')
@@ -33,7 +33,7 @@ export default function Register() {
             regexp(/(?:https?:\/\/)?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w\-\.]*\/)*([\w\-\.]*)/,
                 'Xin vui lòng nhập đúng địa chỉ facebook')
         ],
-    })
+    }, user)
     const [isSuccess, setIsSuccess] = useState(false)
 
     const onSubmit = () => {
@@ -43,8 +43,8 @@ export default function Register() {
             console.log('Validate error')
         }
     }
-
-    if (!detail) return <div style={{margin: '100px 0'}}>...Not Found...</div>
+    console.log(values)
+    if (!detail) return <div style={{ margin: '100px 0' }}>...Not Found...</div>
 
     return (
         <main className="register-course" id="main">
@@ -73,11 +73,10 @@ export default function Register() {
                                     <div className="time"><strong>Học phí:</strong> {currency(detail.money)} VND</div>
                                 </div>
                                 <div className="form">
-                                    <Field label="Họ và tên" required placeholder="Họ và tên bạn" {...register('name')} />
+                                    <Field disabled label="Họ và tên" required placeholder="Họ và tên bạn" {...register('name')} />
                                     <Field label="Số điện thoại" required placeholder="Số điện thoại" {...register('phone')} />
-                                    <Field label="Email" required placeholder="Email của bạn" {...register('email')} />
+                                    <Field disabled label="Email" required placeholder="Email của bạn" {...register('email')} />
                                     <Field label="URL Facebook" placeholder="URL Facebook" {...register('fb')} />
-                                    <Field label="Ý kiến cá nhân" placeholder="Mong muốn cá nhân và lịch bạn có thể học." renderInput={(props) => <textarea cols={30} rows={10} {...props} />} {...register('content')} />
                                     <Field
                                         {...register('coin')}
                                         label="Sử dụng COIN"
@@ -103,6 +102,7 @@ export default function Register() {
                                             </div>
                                         )}
                                     />
+                                    <Field label="Ý kiến cá nhân" placeholder="Mong muốn cá nhân và lịch bạn có thể học." renderInput={(props) => <textarea cols={30} rows={10} {...props} />} {...register('content')} />
                                     <button onClick={onSubmit} className="btn main rect">đăng ký</button>
                                 </div>
                             </div>

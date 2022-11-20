@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { PATH } from '../../config/path'
 
-export default function Header({ user }) {
+export default function Header({ user, logout }) {
     const { pathname } = useLocation()
     const onOpenMenu = () => {
         document.body.classList.add('menu-is-show')
@@ -15,6 +15,11 @@ export default function Header({ user }) {
     useEffect(() => {
         onCloseMenu()
     }, [pathname])
+
+    const _onLogout = (ev) => {
+        ev.preventDefault()
+        logout()
+    }
 
 
     return (
@@ -50,7 +55,7 @@ export default function Header({ user }) {
                                     <div className="sub">
                                         <Link to={PATH.profile.course}>Khóa học của tôi</Link>
                                         <Link to={PATH.profile.index}>Thông tin tài khoản</Link>
-                                        <Link to="#">Đăng xuất</Link>
+                                        <Link onClick={_onLogout} to="#">Đăng xuất</Link>
                                     </div>
                                 </div>
                             ) : (

@@ -21,8 +21,7 @@ export default function Home() {
                     </div>
                 </div>
                 <div className="jarallax-img">
-                    <img data-src="img/bg-cover.jpg" alt="" className="lazyload" />
-                    <div className="video-bg lazyload" data-src="video/Spacedev-video-bg2.mp4" />
+                    <img src="/img/bg-cover.jpg" alt=""/>
                 </div>
             </div>
             <section className="section-1">

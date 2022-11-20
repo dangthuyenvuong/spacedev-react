@@ -28,17 +28,31 @@ import Team from './pages/team'
 
 function App() {
 
-  const [user, setUser] = useState()
+  const [user, setUser] = useState(() => {
+    return JSON.parse(localStorage.getItem('user'))
+  })
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(user))
+  }, [user])
+
+
   const login = () => {
     setUser({
       name: 'Dang Thuyen Vuong',
-      avatar: '/img/avt.png'
+      avatar: '/img/avt.png',
+      email: 'nguyenvana@gmail.com'
     })
   }
 
+  const logout = () => {
+    setUser()
+  }
+
+
+
   return (
     <Routes>
-      <Route element={<MainLayout user={user} />}>
+      <Route element={<MainLayout user={user} logout={logout}/>}>
         <Route index element={<Home />} />
         <Route path={PATH.contact} element={<Contact />} />
         <Route path={PATH.course}>
@@ -46,7 +60,6 @@ function App() {
           <Route path={PATH.courseDetail} element={<CourseDetail />} />
         </Route>
         <Route path={PATH.team} element={<Team />} />
-        <Route path={PATH.courseRegister} element={<Register />} />
         <Route path={PATH.project} element={<Project />} />
         <Route path={PATH.faq} element={<FAQ />} />
         <Route path={PATH.payment} element={<Payment />} />
@@ -59,6 +72,7 @@ function App() {
         </Route>
 
         <Route element={<PrivateRoute redirect={PATH.signin} user={user} />}>
+          <Route path={PATH.courseRegister} element={<Register user={user}/>} />
           <Route path={PATH.profile.index} element={<ProfileLayout user={user} />}>
             <Route index element={<Profile />} />
             <Route path={PATH.profile.course} element={<MyCourse />} />
