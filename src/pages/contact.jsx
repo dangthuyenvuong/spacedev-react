@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
+import Button from '../components/Button'
 import Field from '../components/Field'
 import { useForm } from '../hooks/useForm'
+import { organizationService } from '../services/organization.service'
 import { regexp, required, validate } from '../utils/validate'
+import { message } from 'antd'
 
 export default function Contact() {
-    const { register, validate } = useForm({
+    const [loading, setLoading] = useState(false)
+    const { register, validate, values, reset } = useForm({
         email: [
             required(),
             regexp('email', 'Xin vui lòng nhập đúng Email')
@@ -27,12 +31,21 @@ export default function Contact() {
         ]
     })
 
-    const onSubmit = (ev) => {
-        ev.preventDefault()
-        if (validate()) {
-            console.log('Validate success')
-        } else {
-            console.log('Validate error')
+    const onSubmit = async (ev) => {
+        try {
+            ev.preventDefault()
+            if (validate()) {
+                setLoading(true)
+                const res = await organizationService.contact(values)
+                message.success('Bạn đã gửi liên hệ thành công, chúng tôi sẽ xử lý trong thời gian sớm nhất')
+                reset()
+            }
+        }catch(err) {
+            console.error(err.message)
+            message.error(err.message)
+        } 
+        finally {
+            setLoading(false)
         }
     }
 
@@ -54,7 +67,8 @@ export default function Contact() {
                     <Field label="Website" placeholder="Đường dẫn website http://" {...register('website')} />
                     <Field label="Tiêu đề" required placeholder="Tiêu đề liên hệ" {...register('title')} />
                     <Field label="Nội dung" required renderInput={(props) => <textarea cols={30} rows={10} {...props} />} {...register('content')} />
-                    <button className="btn main rect" >đăng ký</button>
+                    {/* <button className="btn main rect" >đăng ký</button> */}
+                    <Button loading={loading}>đăng ký</Button>
                 </form>
             </section>
             {/* <div class="register-success">
