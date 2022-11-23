@@ -111,8 +111,8 @@ const courses = [{
 
 export const courseService = {
     // mock data
-    getCourse: () => {
-        return courses
+    getCourse: (query = '') => {
+        return fetch(`https://course.spacedev.vn/elearning/v4/courses${query}`)
     },
 
     getCourseDetail(id) {

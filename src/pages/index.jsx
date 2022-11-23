@@ -1,15 +1,26 @@
-import { useState } from 'react'
-import CourseCard from '../components/CourseCard'
+import { useEffect, useState } from 'react'
+import CourseCard, { CourseCardLoading } from '../components/CourseCard'
+import Skeleton from '../components/Skeleton'
 import { useScrollTop } from '../hooks/useScrollTop'
 import { courseService } from '../services/course.service'
 
 export default function Home() {
-    const [courses, setCourses] = useState(() => {
-        return courseService.getCourse()
-    })
-
+    const [courses, setCourses] = useState([])
+    const [loading, setLoading] = useState(false)
 
     useScrollTop()
+
+    useEffect(() => {
+        setLoading(true)
+        courseService.getCourse('?limit=6')
+            .then(res => res.json())
+            .then(res => {
+                setCourses(res.data)
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+    }, [])
     return (
         <main className="homepage" id="main">
             <div className="banner jarallax">
@@ -21,8 +32,7 @@ export default function Home() {
                     </div>
                 </div>
                 <div className="jarallax-img">
-                    <img data-src="img/bg-cover.jpg" alt="" className="lazyload" />
-                    <div className="video-bg lazyload" data-src="video/Spacedev-video-bg2.mp4" />
+                    <img src="https://spacedev.vn/images/bn-top.jpg" alt="" />
                 </div>
             </div>
             <section className="section-1">
@@ -37,7 +47,8 @@ export default function Home() {
                     </div>
                     <div className="list row">
                         {
-                            courses.map(e => <CourseCard key={e.id} {...e}/>)
+                            loading ? Array.from(Array(6)).map((_, i) => <CourseCardLoading key={i} style={{marginBottom: 30}} />) :
+                                courses.map(e => <CourseCard key={e.id} {...e} />)
                         }
                     </div>
                 </div>
@@ -48,7 +59,7 @@ export default function Home() {
                         <div className="titlebox col-md-6 col-sm-12 col-xs-12">
                             <h2 className="main-title white textleft">Những điều <br /><span>đặc biệt</span> tại Spacedev</h2>
                             <div className="videodif" data-src="video/cfd-video-intro.mp4">
-                                <img src="./img/img-cfd-dac-biet.jpg" alt="" />
+                                <img src="https://svtech.com.vn/wp-content/uploads/2020/07/dexus-office-space.jpg" alt="" />
                                 <div className="play-btn btn-video-intro">
                                     <img src="img/play-icon.svg" alt="" />
                                 </div>
@@ -56,29 +67,24 @@ export default function Home() {
                         </div>
                         <div className="contentbox col-md-6 col-sm-12 col-xs-12">
                             <div className="item">
-                                <h4>Không cam kết đầu ra</h4>
-                                <p>Với Spacedev thì việc cam kết đầu ra nó sẽ không có ý nghĩa nếu như cả người hướng dẫn và
-                                    người
-                                    học không thật sự tâm huyết và cố gắng. Vì thế, đội ngũ Spacedev sẽ làm hết sức để giúp các
-                                    thành
-                                    viên tạo ra sản phẩm có giá trị, thay vì cam kết.
+                                <h4>Cam kết chất lượng</h4>
+                                <p>Các khóa học của spacedev được soạn thảo cẩn thận và sắp xếp một cách có trật tự giúp cho việc học trở nên dễ dàng
+                                    hơn. Bên cạnh đó các kỹ thuật, công nghệ áp dụng hoàn toàn là các kiến thực thực tế trong các doanh nghiệp đang áp dụng
+                                    giúp cho kiến thức trở nên hữu dụng và nhớ lâu hơn, học viên không cần phải nhớ quá nhiều kiến thức để đạt đến khả năng
+                                    có thể đi làm được trong các doanh nghiệp lớn.
                                 </p>
                             </div>
-                            <div className="item">
-                                <h4>Không chỉ là một lớp học</h4>
-                                <p>Spacedev không phải một lớp học thuần túy, tất cả thành viên là một team, cùng hổ trợ, chia sẻ
-                                    và
-                                    giúp đỡ nhau trong suốt quá trình học và sau này, với sự hướng dẫn tận tâm của các thành
-                                    viên đồng sáng lập.
+                            <div class="item">
+                                <h4>Lấy học viên làm trung tâm</h4>
+                                <p>Với phương châm "Lấy người học làm trung tâm". Khi học viên đến với spacedev sẽ luôn được quan tâm tạo điều kiện tốt nhất để phát triển
+                                    các kỹ năng. Mọi ý kiến phản hồi của học viên đều được lắng nghe và phản hồi một cách tiếp thu nhất có thể.
                                 </p>
                             </div>
-                            <div className="item">
-                                <h4>Không để ai bị bỏ lại phía sau</h4>
-                                <p>Vì chúng ta là một team, những thành viên tiếp thu chậm sẽ được đội ngũ Spacedev kèm cặp đặc
-                                    biệt,
-                                    cùng sự hổ trợ từ các thành viên khác. Vì mục tiêu cuối cùng là hoàn thành
-                                    khóa
-                                    học thật tốt.
+                            <div class="item">
+                                <h4>Trung thực và giữ chữ tín</h4>
+                                <p>Trong môi trường phát triển đầy cạnh tranh và thay đổi liên tục, spacedev luôn giữ cho mình những tiêu chí quan trọng trong suốt quá
+                                    trình hoạt động. Trong đó "trung thực và giữ chữ tín" với khách hàng luôn là tiêu chí hàng đầu spacedev tuân theo dù cho việc đó gây ảnh hưởng
+                                    đến hoạt động của spacedev như thế nào.
                                 </p>
                             </div>
                         </div>

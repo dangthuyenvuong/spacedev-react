@@ -1,6 +1,8 @@
 import React from 'react'
 import { generatePath, Link } from 'react-router-dom'
 import { PATH } from '../../config/path'
+import Skeleton from '../Skeleton'
+
 export default function CourseCard({ thumbnailUrl, title, short_description, slug, id }) {
     const path = generatePath(PATH.courseDetail, { slug, id })
     const registerPath = generatePath(PATH.courseRegister, { slug, id })
@@ -25,6 +27,33 @@ export default function CourseCard({ thumbnailUrl, title, short_description, slu
                         <div className="name">Vương Đặng</div>
                     </div>
                     <Link to={registerPath} className="register-btn">Đăng Ký</Link>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+
+export const CourseCardLoading = (props) => {
+    return (
+        <div className="col-md-4 course" {...props}>
+            <div className="wrap">
+                <Skeleton height={300} />
+                <div className="info">
+                    <Skeleton height={30} />
+                    <p className="des">
+                        <Skeleton height={80} />
+                    </p>
+                </div>
+                <div className="bottom">
+                    <div className="teacher">
+                        <div className="avatar">
+                            <Skeleton height={36} width={36} shap="circle" />
+                        </div>
+                        <div className="name">
+                            <Skeleton height={24} width={150}/>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
