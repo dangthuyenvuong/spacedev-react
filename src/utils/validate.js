@@ -62,7 +62,6 @@ export const validate = (rules, forms) => {
                     regexp = new RegExp()
                 }
 
-                console.log(regexp);
                 if (!regexp.test(forms[name])) {
                     errorObject[name] = rule.message || ERROR_MESSAGE.regexp
                 }

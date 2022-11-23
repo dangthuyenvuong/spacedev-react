@@ -1,10 +1,10 @@
-import { COURSE_API } from '../config/api'
+import { api, COURSE_API } from '../config/api'
 
 
 export const courseService = {
     // mock data
     getCourse: (query = '') => {
-        return fetch(`${COURSE_API}${query}`)
+        return api.get(`${COURSE_API}${query}`)
     },
 
     getCourseDetail(id) {

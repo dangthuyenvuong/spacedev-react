@@ -39,7 +39,8 @@ export default function Contact() {
             if (validate()) {
                 setLoading(true)
                 const res = await organizationService.contact(values)
-                if (res.data.success) {
+                console.log(res);
+                if (res.success) {
                     message.success('Bạn đã gửi liên hệ thành công, chúng tôi sẽ xử lý trong thời gian sớm nhất')
                     reset()
                     setIsSuccess(true)
