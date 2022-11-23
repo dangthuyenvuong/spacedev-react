@@ -6,15 +6,17 @@ import { courseService } from '../../services/course.service'
 import { regexp, required } from '../../utils/validate'
 import { currency } from '../../utils/currency'
 import { useScrollTop } from '../../hooks/useScrollTop'
+import { useFetch } from '../../hooks/useFetch'
 export default function Register() {
     const { id } = useParams()
-    const [detail, setDetail] = useState()
+    const {data: detail, loading} = useFetch(() => courseService.getCourseDetail(id))
+    // const [detail, setDetail] = useState()
     useScrollTop([id])
 
-    useEffect(() => {
-        let course = courseService.getCourseDetail(parseInt(id))
-        setDetail(course)
-    }, [id])
+    // useEffect(() => {
+    //     let course = courseService.getCourseDetail(parseInt(id))
+    //     setDetail(course)
+    // }, [id])
 
     const { register, validate, values } = useForm({
         email: [

@@ -13,7 +13,7 @@ export default function Home() {
     useEffect(() => {
         setLoading(true)
         courseService.getCourse('?limit=6')
-            .then(res => res.json())
+            // .then(res => res.json())
             .then(res => {
                 setCourses(res.data)
             })

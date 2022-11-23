@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { generatePath, Link, useParams, useSearchParams } from 'react-router-dom'
 import CourseCard from '../../components/CourseCard'
+import Skeleton from '../../components/Skeleton'
 import { PATH } from '../../config/path'
+import { useFetch } from '../../hooks/useFetch'
 import { useScrollTop } from '../../hooks/useScrollTop'
 import { courseService } from '../../services/course.service'
 import { currency } from '../../utils/currency'
@@ -20,24 +22,55 @@ import { currency } from '../../utils/currency'
 export default function CourseDetail() {
     const { id } = useParams()
     const [searchParams, setSearchParams] = useSearchParams()
-    useScrollTop(id)
+    useScrollTop([id])
 
-    const [detail, setDetail] = useState()
+    const { data: detail, loading } = useFetch(() => courseService.getCourseDetail(id), [id])
 
-    useEffect(() => {
-        let course = courseService.getCourseDetail(parseInt(id))
-        setDetail(course)
-    }, [id])
+    // const [detail, setDetail] = useState()
 
-    const [relative, setRelative] = useState(() => {
-        return courseService.getRelative(id)
-    })
+    // useEffect(() => {
+    //     let course = courseService.getCourseDetail(parseInt(id))
+    //     setDetail(course)
+    // }, [id])
+
+    // const [relative, setRelative] = useState(() => {
+    //     return courseService.getRelative(id)
+    // })
+    const { data: related, loading: relatedLoading } = useFetch(() => courseService.getRelated(id), [id])
+
+
+
+    if (loading) {
+        return (
+            <main className="course-detail" id="main">
+                <section className="banner style2" style={{ '--background': '#cde6fb' }}>
+                    <div className="container">
+                        <div className="info">
+                            <h1>
+                                <Skeleton width={500} height={64} />
+                            </h1>
+                            <div className="row">
+                                <div className="date">
+                                    <Skeleton width={200} height={24} />
+                                </div>
+                                <div className="time">
+                                    <Skeleton width={200} height={24} />
+                                </div>
+                            </div>
+                            <div style={{ marginTop: 40 }}>
+                                <Skeleton height={46} width={138} />
+                            </div>
+                        </div>
+                    </div>
+                </section >
+            </main >
+        )
+    }
+
 
     if (!detail) return <div style={{ margin: '100px 0' }}>...Not Found...</div>
-
+    console.log(detail);
     const registerPath = generatePath(PATH.courseRegister, { slug: detail.slug, id: detail.id })
-
-
     return (
         <main className="course-detail" id="main">
             <section className="banner style2" style={{ '--background': '#cde6fb' }}>
@@ -195,7 +228,7 @@ export default function CourseDetail() {
                     </div>
                     <div className="list row">
                         {
-                            relative.map(e => <CourseCard key={e.id} {...e} />)
+                            related && related?.map(e => <CourseCard key={e.id} {...e} />)
                         }
                     </div>
                 </div>

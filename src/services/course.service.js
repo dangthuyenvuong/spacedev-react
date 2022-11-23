@@ -8,11 +8,10 @@ export const courseService = {
     },
 
     getCourseDetail(id) {
-        // return courses.find(e => e.id === id)
+        return api.get(`${COURSE_API}/${id}`)
     },
 
-    getRelative(id) {
-        const start = Math.floor(Math.random() * (courses.length - 3))
-        return courses.filter(e => e.id !== id).slice(start, start + 3)
+    getRelated(id) {
+        return api.get(`${COURSE_API}/related/${id}`)
     }
 }
