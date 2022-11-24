@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from 'react'
 import styled from 'styled-components'
 import Button from '../components/Button'
 
-const Context = createContext({demo: 100})
+const Context = createContext({ demo: 100 })
 
 export default function Demo() {
 
@@ -10,14 +10,16 @@ export default function Demo() {
     const [count2, setCount2] = useState(100)
 
     return (
-        <div style={{ padding: '100px 0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Context.Provider value={{ count: count1, setCount: setCount1, aaaaaaa: 1 }}>
+        <Context.Provider value={{ count: count1, setCount: setCount1, aaaaaaa: 1 }}>
+
+            <div style={{ padding: '100px 0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Count />
-            </Context.Provider>
-            {/* <Context.Provider value={{ count: count2, setCount: setCount2, bbbb: 2 }}> */}
-                <Count />
-            {/* </Context.Provider> */}
-        </div>
+                <Context.Provider value={{ count: count2, setCount: setCount2, bbbb: 2 }}>
+                    <Count />
+                </Context.Provider>
+            </div>
+        </Context.Provider>
+
     )
 }
 
@@ -50,5 +52,7 @@ export const Count = () => {
 /**
  * Context API
  * 1. Những component con, cháu, chắt,... trong Provider sẽ lấy các giá trị Provider thông qua useContext
- * 2. Trong trường hợp component không đặt trong 1 Provider đó, defaultValue khi tạo Context sẽ được return về
+ * 2. Trong trường hợp component không đặt trong Provider đó, defaultValue khi tạo Context sẽ được return về
+ * 3. Nếu component được bọc bởi nhiều Provider cùng chức năng, component sẽ lấy giá trị từ Provider gần nhất
+ * 4. Thường mỗi Context sẽ làm một nhiệm vụ riêng biệt ví dụ: ThemeContext, AuthContext, PageContext,.... và 1 app được cài đặt nhiều Context
  */
