@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRoutes } from 'react-router-dom'
 import './assets/css/taildwin.css'
 import './assets/css/custom.css'
@@ -7,15 +7,24 @@ import { routes } from './routes'
 
 function App() {
 
-  const [user, setUser] = useState()
+  const [user, setUser] = useState(() => {
+    return JSON.parse(localStorage.getItem('user'))
+  })
   const login = () => {
     setUser({
       name: 'Dang Thuyen Vuong',
       avatar: '/img/avt.png'
     })
   }
+  const logout = () => {
+    setUser()
+  }
+  
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(user || null))
+  }, [user])
 
-  const element = useRoutes(routes(user, login))
+  const element = useRoutes(routes(user, login, logout))
 
   return (
     element

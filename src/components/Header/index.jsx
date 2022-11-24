@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { PATH } from '../../config/path'
 
-export default function Header({ user }) {
+export default function Header({ user, logout }) {
     const { pathname } = useLocation()
     const onOpenMenu = () => {
         document.body.classList.add('menu-is-show')
@@ -50,7 +50,10 @@ export default function Header({ user }) {
                                     <div className="sub">
                                         <Link to={PATH.profile.course}>Khóa học của tôi</Link>
                                         <Link to={PATH.profile.index}>Thông tin tài khoản</Link>
-                                        <Link to="#">Đăng xuất</Link>
+                                        <a href="#" onClick={ev => {
+                                            ev.preventDefault()
+                                            logout()
+                                        }}>Đăng xuất</a>
                                     </div>
                                 </div>
                             ) : (

@@ -1,6 +1,10 @@
 import React from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
+import Button from '../components/Button'
+import { Input } from '../components/Input'
 import { PATH } from '../config/path'
+import { useForm } from '../hooks/useForm'
+import { minMax, regexp, required } from '../utils/validate'
 
 
 /**
@@ -17,12 +21,26 @@ import { PATH } from '../config/path'
  */
 
 export default function Signin({ login }) {
-    console.log('Signin re-render')
+    const form = useForm({
+        username: [
+            required('Vui lòng điền tài khoản'),
+            regexp('email', 'Xin vui lòng điền đúng định dạng Email')
+        ],
+        password: [
+            required('Xin vui lòng điền mật khẩu'),
+            minMax(6, 32)
+        ]
+    })
     const navigate = useNavigate()
     const _onLogin = () => {
-        login()
-        navigate(PATH.profile.index)
+        if (form.validate()) {
+            login()
+            navigate(PATH.profile.index)
+        }
+
     }
+
+
 
 
     return (
@@ -31,8 +49,10 @@ export default function Signin({ login }) {
                 {/* login-form */}
                 <div className="ct_login" >
                     <h2 className="title">Đăng nhập</h2>
-                    <input type="text" placeholder="Email / Số điện thoại" />
-                    <input type="password" placeholder="Mật khẩu" />
+                    {/* <input type="text" placeholder="Email / Số điện thoại" />
+                    <input type="password" placeholder="Mật khẩu" /> */}
+                    <Input {...form.register('username')} className="mb-5" placeholder="Tải khoản"  />
+                    <Input {...form.register('password')} className="mb-5" type="password" placeholder="Mật khẩu" />
                     <div className="remember">
                         <label className="btn-remember">
                             <div>
@@ -42,7 +62,7 @@ export default function Signin({ login }) {
                         </label>
                         <a href="#" className="forget">Quên mật khẩu?</a>
                     </div>
-                    <button onClick={_onLogin} className="btn rect main btn-login">đăng nhập</button>
+                    <Button onClick={_onLogin} className="btn rect main btn-login">đăng nhập</Button>
                     <div className="text-register" style={{}}>
                         <span>Nếu bạn chưa có tài khoản?</span> <a className="link" href="#">Đăng ký</a>
                     </div>
@@ -51,3 +71,5 @@ export default function Signin({ login }) {
         </main>
     )
 }
+
+

@@ -28,10 +28,10 @@ import Demo from "./pages/demo";
 
 
 
-export const routes = (user, login) => {
+export const routes = (user, login, logout) => {
     return [
         {
-            element: <MainLayout user={user} />,
+            element: <MainLayout user={user} logout={logout} />,
             children: [
                 {
                     element: <Home />,
