@@ -1,13 +1,10 @@
-import React from 'react'
-import { Spin } from 'antd'
+import { ButtonStyle } from './style'
 import { LoadingOutlined } from '@ant-design/icons';
-import { ButtonStyle } from './style';
 
 
-export default function Button({ loading, children }) {
-
+export default function Button({ loading, children, ...props }) {
     return (
-        <ButtonStyle className="btn main rect flex gap-1" disabled={loading}>
+        <ButtonStyle {...props} disabled={loading} className={`btn main rect gap-3 ${props.className ?? ''}`} >
             {loading && <LoadingOutlined style={{ fontSize: 20 }} />}
             {children}
         </ButtonStyle>

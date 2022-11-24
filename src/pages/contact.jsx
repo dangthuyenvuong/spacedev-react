@@ -5,11 +5,13 @@ import { useForm } from '../hooks/useForm'
 import { organizationService } from '../services/organization.service'
 import { regexp, required, validate } from '../utils/validate'
 import { message } from 'antd'
+import { useAsync } from '../hooks/useAsync'
 // message.success('Bạn đã gửi liên hệ thành công, chúng tôi sẽ xử lý trong thời gian sớm nhất', 1000000)
 
 export default function Contact() {
     const [isSuccess, setIsSuccess] = useState(false)
-    const [loading, setLoading] = useState(false)
+    const { loading, excute } = useAsync(organizationService.contact)
+
     const { register, validate, values, reset } = useForm({
         email: [
             required(),
@@ -37,21 +39,14 @@ export default function Contact() {
         try {
             ev.preventDefault()
             if (validate()) {
-                setLoading(true)
-                const res = await organizationService.contact(values)
-                console.log(res);
-                if (res.success) {
-                    message.success('Bạn đã gửi liên hệ thành công, chúng tôi sẽ xử lý trong thời gian sớm nhất')
-                    reset()
-                    setIsSuccess(true)
-                }
+                await excute(values)
+                message.success('Bạn đã gửi liên hệ thành công, chúng tôi sẽ xử lý trong thời gian sớm nhất')
+                reset()
+                setIsSuccess(true)
             }
         } catch (err) {
             console.error(err.message)
             message.error(err.message)
-        }
-        finally {
-            setLoading(false)
         }
     }
 
