@@ -22,6 +22,7 @@ import Signin from "./pages/signin";
 import Signup from "./pages/signup";
 import Team from "./pages/team";
 import Page404 from "./pages/404";
+import Demo from "./pages/demo";
 
 
 
@@ -35,6 +36,10 @@ export const routes = (user, login) => {
                 {
                     element: <Home />,
                     index: true
+                },
+                {
+                    element: <Demo />,
+                    path: '/demo'
                 },
                 {
                     element: <Contact />,
