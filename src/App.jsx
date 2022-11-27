@@ -7,24 +7,9 @@ import { routes } from './routes'
 
 function App() {
 
-  const [user, setUser] = useState(() => {
-    return JSON.parse(localStorage.getItem('user'))
-  })
-  const login = () => {
-    setUser({
-      name: 'Dang Thuyen Vuong',
-      avatar: '/img/avt.png'
-    })
-  }
-  const logout = () => {
-    setUser()
-  }
-  
-  useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(user || null))
-  }, [user])
+ 
 
-  const element = useRoutes(routes(user, login, logout))
+  const element = useRoutes(routes)
 
   return (
     element

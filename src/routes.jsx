@@ -28,113 +28,111 @@ import Demo from "./pages/demo";
 
 
 
-export const routes = (user, login, logout) => {
-    return [
-        {
-            element: <MainLayout user={user} logout={logout} />,
-            children: [
-                {
-                    element: <Home />,
-                    index: true
-                },
-                {
-                    element: <Demo />,
-                    path: '/demo'
-                },
-                {
-                    element: <Contact />,
-                    path: PATH.contact
-                },
-                {
-                    path: PATH.course,
-                    children: [
-                        {
-                            element: <Course />,
-                            index: true
-                        },
-                        {
-                            element: <CourseDetail />,
-                            path: PATH.courseDetail
-                        }
-                    ]
-                },
-                {
-                    element: <Team />,
-                    path: PATH.team
-                },
-                {
-                    element: <Register />,
-                    path: PATH.courseRegister
-                },
-                {
-                    element: <Project />,
-                    path: PATH.project
-                },
-                {
-                    element: <FAQ />,
-                    path: PATH.faq
-                },
-                {
-                    element: <Payment />,
-                    path: PATH.payment
-                },
-                {
-                    element: <Coin />,
-                    path: PATH.coin
-                },
-                {
-                    element: <AuthRoute redirect={PATH.profile.index} user={user} />,
-                    children: [
-                        {
-                            element: <Signin login={login} />,
-                            path: PATH.signin
-                        },
-                        {
-                            element: <Signup />,
-                            path: PATH.signup
-                        },
-                        {
-                            element: <ResetPassword />,
-                            path: PATH.resetPassword
-                        }
-                    ]
-                },
-                {
-                    element: <PrivateRoute redirect={PATH.signin} user={user}/>,
-                    children: [
-                        {
-                            element: <ProfileLayout user={user} />,
-                            path: PATH.profile.index,
-                            children: [
-                                {
-                                    element: <Profile />,
-                                    index: true
-                                },
-                                {
-                                    element: <MyCourse />,
-                                    path: PATH.profile.course
-                                },
-                                {
-                                    element: <MyCoin />,
-                                    path: PATH.profile.coin
-                                },
-                                {
-                                    element: <MyProject />,
-                                    path: PATH.profile.project
-                                },
-                                {
-                                    element: <MyPayment />,
-                                    path: PATH.profile.payment
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    element: <Page404 />,
-                    path: '*'
-                }
-            ]
-        }
-    ]
-}
+export const routes = [
+    {
+        element: <MainLayout />,
+        children: [
+            {
+                element: <Home />,
+                index: true
+            },
+            {
+                element: <Demo />,
+                path: '/demo'
+            },
+            {
+                element: <Contact />,
+                path: PATH.contact
+            },
+            {
+                path: PATH.course,
+                children: [
+                    {
+                        element: <Course />,
+                        index: true
+                    },
+                    {
+                        element: <CourseDetail />,
+                        path: PATH.courseDetail
+                    }
+                ]
+            },
+            {
+                element: <Team />,
+                path: PATH.team
+            },
+            {
+                element: <Register />,
+                path: PATH.courseRegister
+            },
+            {
+                element: <Project />,
+                path: PATH.project
+            },
+            {
+                element: <FAQ />,
+                path: PATH.faq
+            },
+            {
+                element: <Payment />,
+                path: PATH.payment
+            },
+            {
+                element: <Coin />,
+                path: PATH.coin
+            },
+            {
+                element: <AuthRoute redirect={PATH.profile.index} />,
+                children: [
+                    {
+                        element: <Signin />,
+                        path: PATH.signin
+                    },
+                    {
+                        element: <Signup />,
+                        path: PATH.signup
+                    },
+                    {
+                        element: <ResetPassword />,
+                        path: PATH.resetPassword
+                    }
+                ]
+            },
+            {
+                element: <PrivateRoute redirect={PATH.signin} />,
+                children: [
+                    {
+                        element: <ProfileLayout />,
+                        path: PATH.profile.index,
+                        children: [
+                            {
+                                element: <Profile />,
+                                index: true
+                            },
+                            {
+                                element: <MyCourse />,
+                                path: PATH.profile.course
+                            },
+                            {
+                                element: <MyCoin />,
+                                path: PATH.profile.coin
+                            },
+                            {
+                                element: <MyProject />,
+                                path: PATH.profile.project
+                            },
+                            {
+                                element: <MyPayment />,
+                                path: PATH.profile.payment
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                element: <Page404 />,
+                path: '*'
+            }
+        ]
+    }
+]

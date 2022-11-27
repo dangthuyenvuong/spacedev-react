@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { PATH } from '../../config/path'
+import { useAuth } from '../../context/AuthContext'
 
-export default function Header({ user, logout }) {
+export default function Header() {
+    const { user, logout } = useAuth()
     const { pathname } = useLocation()
     const onOpenMenu = () => {
         document.body.classList.add('menu-is-show')

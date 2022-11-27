@@ -74,13 +74,13 @@ export default function Home() {
                                     có thể đi làm được trong các doanh nghiệp lớn.
                                 </p>
                             </div>
-                            <div class="item">
+                            <div className="item">
                                 <h4>Lấy học viên làm trung tâm</h4>
                                 <p>Với phương châm "Lấy người học làm trung tâm". Khi học viên đến với spacedev sẽ luôn được quan tâm tạo điều kiện tốt nhất để phát triển
                                     các kỹ năng. Mọi ý kiến phản hồi của học viên đều được lắng nghe và phản hồi một cách tiếp thu nhất có thể.
                                 </p>
                             </div>
-                            <div class="item">
+                            <div className="item">
                                 <h4>Trung thực và giữ chữ tín</h4>
                                 <p>Trong môi trường phát triển đầy cạnh tranh và thay đổi liên tục, spacedev luôn giữ cho mình những tiêu chí quan trọng trong suốt quá
                                     trình hoạt động. Trong đó "trung thực và giữ chữ tín" với khách hàng luôn là tiêu chí hàng đầu spacedev tuân theo dù cho việc đó gây ảnh hưởng

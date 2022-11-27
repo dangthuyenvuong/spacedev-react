@@ -14,7 +14,20 @@ export const useForm = (rules) => {
         return {
             error: errors[name],
             value: values[name] || '',
-            onChange: (ev) => setValues({ ...values, [name]: ev.target.value })
+            onChange: (ev) => {
+                if (rules[name]) {
+                    const error = validate({
+                        [name]: rules[name]
+                    },{
+                        [name]: ev.target.value
+                    })
+
+                    setError({ ...errors, [name]: error[name] || '' })
+                }
+
+
+                setValues({ ...values, [name]: ev.target.value })
+            }
         }
     }
 

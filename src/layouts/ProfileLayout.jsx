@@ -1,8 +1,11 @@
 import React from 'react'
 import { Navigate, NavLink, Outlet } from 'react-router-dom'
 import { PATH } from '../config/path'
+import { useAuth } from '../context/AuthContext'
 
-export default function ProfileLayout({ user }) {
+export default function ProfileLayout() {
+    const { user } = useAuth()
+
 
     return (
         <main className="profile" id="main">

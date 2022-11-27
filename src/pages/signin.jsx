@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import Button from '../components/Button'
 import { Input } from '../components/Input'
 import { PATH } from '../config/path'
+import { useAuth } from '../context/AuthContext'
 import { useForm } from '../hooks/useForm'
 import { minMax, regexp, required } from '../utils/validate'
 
@@ -20,7 +21,10 @@ import { minMax, regexp, required } from '../utils/validate'
  * AuthRoute: has not logged in yet
  */
 
-export default function Signin({ login }) {
+export default function Signin() {
+    
+
+    const { login } = useAuth()
     const form = useForm({
         username: [
             required('Vui lòng điền tài khoản'),
