@@ -1,24 +1,39 @@
-import { createContext, useContext, useEffect, useState } from "react";
-
+import { message } from "antd";
+import { createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { PATH } from "../config/path";
+import { authService } from '../services/auth.service';
+import { userSerivce } from "../services/user.service";
+import { clearToken, clearUser, getUser, setToken, setUser } from "../utils/token";
 const Context = createContext({})
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(() => {
-        return JSON.parse(localStorage.getItem('user'))
-    })
-    const login = () => {
-        setUser({
-            name: 'Dang Thuyen Vuong',
-            avatar: '/img/avt.png'
-        })
+    const navigate = useNavigate()
+    const [user, _setUser] = useState(getUser)
+    const login = async (data) => {
+        try {
+            const res = await authService.login(data)
+            if (res.data) {
+                setToken(res.data)
+                const user = await userSerivce.getProfile()
+                _setUser(user.data)
+                setUser(user.data)
+                message.success('Đăng nhập tài khoản thành công')
+                navigate(PATH.profile.index)
+            }
+        } catch (err) {
+            console.error(err);
+            if (err?.response?.data?.message) {
+                message.error(err.response.data.message)
+            }
+        }
     }
     const logout = () => {
-        setUser()
+        clearUser()
+        clearToken()
+        _setUser()
+        message.success('Đăng xuất tài khoản thành công')
     }
-
-    useEffect(() => {
-        localStorage.setItem('user', JSON.stringify(user || null))
-    }, [user])
 
     return (
         <Context.Provider value={{ user, login, logout }}>{children}</Context.Provider>

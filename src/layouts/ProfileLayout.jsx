@@ -2,6 +2,7 @@ import React from 'react'
 import { Navigate, NavLink, Outlet } from 'react-router-dom'
 import { PATH } from '../config/path'
 import { useAuth } from '../context/AuthContext'
+import { avatarDefault } from '../config'
 
 export default function ProfileLayout() {
     const { user } = useAuth()
@@ -13,7 +14,7 @@ export default function ProfileLayout() {
                 <div className="top-info">
                     <div className="avatar">
                         {/* <span class="text">H</span> */}
-                        <img src={user.avatar} alt="" />
+                        <img src={user.avatar ? user.avatar : avatarDefault} alt="" />
                         <div className="camera" />
                     </div>
                     <div className="name">{user.name}</div>

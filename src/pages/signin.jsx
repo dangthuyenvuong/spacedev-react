@@ -1,11 +1,15 @@
 import React from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import Button from '../components/Button'
 import { Input } from '../components/Input'
 import { PATH } from '../config/path'
 import { useAuth } from '../context/AuthContext'
 import { useForm } from '../hooks/useForm'
 import { minMax, regexp, required } from '../utils/validate'
+import { useAsync } from '../hooks/useAsync'
+import { authService } from '../services/auth.service'
+import { message } from 'antd'
+import { setToken } from '../utils/token'
 
 
 /**
@@ -22,9 +26,10 @@ import { minMax, regexp, required } from '../utils/validate'
  */
 
 export default function Signin() {
-    
 
-    const { login } = useAuth()
+
+    const { loading, login, } = useAuth()
+    const { excute: loginService, error } = useAsync(login)
     const form = useForm({
         username: [
             required('Vui lòng điền tài khoản'),
@@ -36,14 +41,12 @@ export default function Signin() {
         ]
     })
     const navigate = useNavigate()
-    const _onLogin = () => {
+    const _onLogin = async () => {
         if (form.validate()) {
-            login()
-            navigate(PATH.profile.index)
+            await loginService(form.values)
         }
 
     }
-
 
 
 
@@ -55,7 +58,7 @@ export default function Signin() {
                     <h2 className="title">Đăng nhập</h2>
                     {/* <input type="text" placeholder="Email / Số điện thoại" />
                     <input type="password" placeholder="Mật khẩu" /> */}
-                    <Input {...form.register('username')} className="mb-5" placeholder="Tải khoản"  />
+                    <Input {...form.register('username')} className="mb-5" placeholder="Tải khoản" />
                     <Input {...form.register('password')} className="mb-5" type="password" placeholder="Mật khẩu" />
                     <div className="remember">
                         <label className="btn-remember">
@@ -64,11 +67,11 @@ export default function Signin() {
                             </div>
                             <p>Nhớ mật khẩu</p>
                         </label>
-                        <a href="#" className="forget">Quên mật khẩu?</a>
+                        <Link to={PATH.resetPassword} className="forget">Quên mật khẩu?</Link>
                     </div>
-                    <Button onClick={_onLogin} className="btn rect main btn-login">đăng nhập</Button>
+                    <Button loading={loading} onClick={_onLogin} className="btn rect main btn-login">đăng nhập</Button>
                     <div className="text-register" style={{}}>
-                        <span>Nếu bạn chưa có tài khoản?</span> <a className="link" href="#">Đăng ký</a>
+                        <span>Nếu bạn chưa có tài khoản?</span> <Link className="link" to={PATH.signup}>Đăng ký</Link>
                     </div>
                 </div>
             </div>

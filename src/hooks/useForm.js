@@ -15,18 +15,17 @@ export const useForm = (rules) => {
             error: errors[name],
             value: values[name] || '',
             onChange: (ev) => {
+                let _values = { ...values, [name]: ev.target.value }
                 if (rules[name]) {
                     const error = validate({
                         [name]: rules[name]
-                    },{
-                        [name]: ev.target.value
-                    })
+                    },_values)
 
                     setError({ ...errors, [name]: error[name] || '' })
                 }
 
 
-                setValues({ ...values, [name]: ev.target.value })
+                setValues(_values)
             }
         }
     }
