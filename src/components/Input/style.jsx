@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 export const InputStyle = styled.div`
     position: relative;
+    flex: 1;
+    input {
+        width: 100%;
+    }
     &.error {
         input {
             border-color: red;
