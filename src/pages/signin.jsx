@@ -28,8 +28,8 @@ import { setToken } from '../utils/token'
 export default function Signin() {
 
 
-    const { loading, login, } = useAuth()
-    const { excute: loginService, error } = useAsync(login)
+    const { login, } = useAuth()
+    const { excute: loginService, loading } = useAsync(login)
     const form = useForm({
         username: [
             required('Vui lòng điền tài khoản'),

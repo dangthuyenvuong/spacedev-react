@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "../config/path";
 import { authService } from '../services/auth.service';
-import { userSerivce } from "../services/user.service";
+import { userService } from "../services/user.service";
 import { clearToken, clearUser, getUser, setToken, setUser } from "../utils/token";
 const Context = createContext({})
 
@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
             const res = await authService.login(data)
             if (res.data) {
                 setToken(res.data)
-                const user = await userSerivce.getProfile()
+                const user = await userService.getProfile()
                 _setUser(user.data)
                 setUser(user.data)
                 message.success('Đăng nhập tài khoản thành công')
