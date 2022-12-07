@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import CourseCard, { CourseCardLoading } from '../components/CourseCard'
-import Skeleton from '../components/Skeleton'
 import { useScrollTop } from '../hooks/useScrollTop'
 import { courseService } from '../services/course.service'
+import { Modal } from '../components/Modal'
+import { AspectRatio } from '../components/AspectRatio'
 
 export default function Home() {
     const [courses, setCourses] = useState([])
     const [loading, setLoading] = useState(false)
+    const [isOpenVideoModal, setIsOpenVideoModal] = useState(false)
 
     useScrollTop()
 
@@ -23,6 +25,11 @@ export default function Home() {
     }, [])
     return (
         <main className="homepage" id="main">
+            <Modal visible={isOpenVideoModal} maskClosable={false} onCancel={() => setIsOpenVideoModal(false)}>
+                <AspectRatio width={1000} ratio={9/16} className="video-src">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/oTsopKtMS_0?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </AspectRatio>
+            </Modal>
             <div className="banner jarallax">
                 <div className="container">
                     <div className="content">
@@ -47,7 +54,7 @@ export default function Home() {
                     </div>
                     <div className="list row">
                         {
-                            loading ? Array.from(Array(6)).map((_, i) => <CourseCardLoading key={i} style={{marginBottom: 30}} />) :
+                            loading ? Array.from(Array(6)).map((_, i) => <CourseCardLoading key={i} style={{ marginBottom: 30 }} />) :
                                 courses.map(e => <CourseCard key={e.id} {...e} />)
                         }
                     </div>
@@ -60,8 +67,8 @@ export default function Home() {
                             <h2 className="main-title white textleft">Những điều <br /><span>đặc biệt</span> tại Spacedev</h2>
                             <div className="videodif" data-src="video/cfd-video-intro.mp4">
                                 <img src="https://svtech.com.vn/wp-content/uploads/2020/07/dexus-office-space.jpg" alt="" />
-                                <div className="play-btn btn-video-intro">
-                                    <img src="img/play-icon.svg" alt="" />
+                                <div onClick={() => setIsOpenVideoModal(true)} className="play-btn btn-video-intro">
+                                    <img src="/img/play-icon.svg" alt="" />
                                 </div>
                             </div>
                         </div>
