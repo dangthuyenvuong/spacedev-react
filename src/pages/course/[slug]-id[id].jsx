@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { generatePath, Link, useParams, useSearchParams } from 'react-router-dom'
+import { Accordion } from '../../components/Accordion'
 import CourseCard from '../../components/CourseCard'
 import Skeleton from '../../components/Skeleton'
 import { PATH } from '../../config/path'
@@ -69,7 +70,6 @@ export default function CourseDetail() {
 
 
     if (!detail) return <div style={{ margin: '100px 0' }}>...Not Found...</div>
-    console.log(detail);
     const registerPath = generatePath(PATH.courseRegister, { slug: detail.slug, id: detail.id })
     return (
         <main className="course-detail" id="main">
@@ -103,66 +103,11 @@ export default function CourseDetail() {
                         <img src="/img/course-detail-img.png" alt="" />
                     </div>
                     <h3 className="title">nội dung khóa học</h3>
-                    <div className="accordion">
-                        <div className="accordion__title">
-                            <div className="date">Ngày 1</div>
-                            <h3>Giới thiệu HTML, SEO, BEM.</h3>
-                        </div>
-                        <div className="content">
-                            I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                            some tangible benefits over alternatives like VueJS for simple page interactions.
-                        </div>
-                    </div>
-                    <div className="accordion">
-                        <div className="accordion__title">
-                            <div className="date">Ngày 2</div>
-                            <h3>CSS, CSS3, Flexbox, Grid</h3>
-                        </div>
-                        <div className="content">
-                            I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                            some tangible benefits over alternatives like VueJS for simple page interactions.
-                        </div>
-                    </div>
-                    <div className="accordion">
-                        <div className="accordion__title">
-                            <div className="date">Ngày 3</div>
-                            <h3>Media Queries</h3>
-                        </div>
-                        <div className="content">
-                            I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                            some tangible benefits over alternatives like VueJS for simple page interactions.
-                        </div>
-                    </div>
-                    <div className="accordion">
-                        <div className="accordion__title">
-                            <div className="date">Ngày 4</div>
-                            <h3>Boostrap 4</h3>
-                        </div>
-                        <div className="content">
-                            I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                            some tangible benefits over alternatives like VueJS for simple page interactions.
-                        </div>
-                    </div>
-                    <div className="accordion">
-                        <div className="accordion__title">
-                            <div className="date">Ngày 5</div>
-                            <h3>Thực hành dự án website Landing Page</h3>
-                        </div>
-                        <div className="content">
-                            I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                            some tangible benefits over alternatives like VueJS for simple page interactions.
-                        </div>
-                    </div>
-                    <div className="accordion">
-                        <div className="accordion__title">
-                            <div className="date">Ngày 6</div>
-                            <h3>Cài đặt Grunt và cấu trúc thư mục dự án</h3>
-                        </div>
-                        <div className="content">
-                            I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                            some tangible benefits over alternatives like VueJS for simple page interactions.
-                        </div>
-                    </div>
+                    <Accordion.Group>
+                        {
+                            detail.content.map((e, i) => <Accordion date={i + 1} key={i} {...e}>{e.content}</Accordion>)
+                        }
+                    </Accordion.Group>
                     <h3 className="title">yêu cầu cần có</h3>
                     <div className="row row-check">
                         <div className="col-md-6">Đã từng học qua HTML, CSS</div>

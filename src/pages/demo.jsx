@@ -2,6 +2,15 @@ import React, { createContext, useContext, useState } from 'react'
 import styled from 'styled-components'
 import Button from '../components/Button'
 
+
+/**
+ * Local state và global state
+ * Khi nào cần sử dụng global state ?
+ * Cách khai báo global state và cách sử dụng
+ * Những lưu ý khi sử dụng Content API
+ */
+
+
 const Context = createContext({ demo: 100 })
 
 export default function Demo() {
