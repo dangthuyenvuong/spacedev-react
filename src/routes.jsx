@@ -23,7 +23,7 @@ import Signup from "./pages/signup";
 import Team from "./pages/team";
 import Page404 from "./pages/404";
 import Demo from "./pages/demo";
-import { Ref } from "./pages/ref";
+import { DemoReact } from "./pages/demo-react";
 
 
 
@@ -42,7 +42,7 @@ export const routes = [
                 path: '/demo'
             },
             {
-                element: <Ref />,
+                element: <DemoReact />,
                 path: '/ref'
             },
             {

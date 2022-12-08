@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import Button from '../components/Button'
 import { Input } from '../components/Input';
 
-export const Ref = () => {
+export const DemoReact = () => {
     const ref = useRef()
     const firstInputRef = useRef()
     useEffect(() => {
@@ -64,10 +64,13 @@ export const Ref = () => {
 
 /**
  * # Ref level 1:
- * - Thường dùng để lấy ra 1 web-component
- * - Xem như 1 biến bình thường lưu trữ giá trị, không bị thay đổi mỗi lần re-render
+ * - Thường dùng để lấy ra 1 web-component ---> đặt ref vào trong 1 web component muốn lấy
+ * - Xem như 1 biến bình thường lưu trữ giá trị, không bị thay đổi mỗi lần re-render ---> tạo kèm default value hoặc thay đổi trực tiếp ref.current mà không component re-render
  * 
  * # Ref level 2: forwardRef
  * - Làm sao để lấy 1 web component bên trong 1 component ?
- * - forwardRef: truyền ref vào 1 component, từ component đó sẽ forwardRef vào trong 1 web component
+ * - Truyền ref vào 1 component, component phải được bọc trong forwardRef, từ component đó sẽ đặt ref vào trong 1 web component mong muốn
+ * 
+ * # Ref level 3: forwardRef kết hợp userImperativeHandle ---> Trả ra một thể hiện khác của ref
+ * - forwardRef vào trong một component, component sẽ sử dụng useImperativeHandle để trả về cho ref những giá trị cần thiết
  */
