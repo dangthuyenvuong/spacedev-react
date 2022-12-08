@@ -1,12 +1,22 @@
 import React from 'react'
 import { useEffect } from 'react';
+import { useState } from 'react';
 import { useRef } from 'react'
 import Button from '../components/Button'
 import { Input } from '../components/Input';
 
 export const DemoReact = () => {
-    const ref = useRef()
+    const ref = useRef(0)
     const firstInputRef = useRef()
+    const [,setRandom] = useState()
+
+    useEffect(() => {
+        setInterval(() => {
+            console.log(ref.current);
+            ref.current++
+        }, 1000)
+    }, [])
+
     useEffect(() => {
         firstInputRef.current.focus()
     }, [])
@@ -24,7 +34,7 @@ export const DemoReact = () => {
                     Đừng ngần ngại liên hệ với <strong>Spacedev</strong> để cùng nhau tạo ra những sản phẩm giá trị, cũng như
                     việc hợp tác với các đối tác tuyển dụng và công ty trong và ngoài nước.
                 </p>
-                <form className="form" ref={ref} onSubmit={onSubmit}>
+                <form className="form" onSubmit={onSubmit}>
                     <label>
                         <p>Họ và tên<span>*</span></p>
                         <input type="text" name="name" placeholder="Họ và tên bạn" />
@@ -32,7 +42,7 @@ export const DemoReact = () => {
                     <label>
                         <p>Số điện thoại</p>
                         {/* <input type="text" name="phone" placeholder="Số điện thoại" /> */}
-                        <Input ref={firstInputRef} name="phone" placeholder="Số điện thoại"/>
+                        <Input ref={firstInputRef} name="phone" placeholder="Số điện thoại" />
                     </label>
                     <label>
                         <p>Email<span>*</span></p>
@@ -53,6 +63,8 @@ export const DemoReact = () => {
                 </form>
 
                 <Button className="btn main rect" onClick={onSubmit}>đăng ký</Button>
+                COUNT: {ref.current}
+                <Button className="btn main rect" onClick={() => setRandom({})}>Update UI</Button>
             </section>
         </main>
     )
@@ -65,7 +77,8 @@ export const DemoReact = () => {
 /**
  * # Ref level 1:
  * - Thường dùng để lấy ra 1 web-component ---> đặt ref vào trong 1 web component muốn lấy
- * - Xem như 1 biến bình thường lưu trữ giá trị, không bị thay đổi mỗi lần re-render ---> tạo kèm default value hoặc thay đổi trực tiếp ref.current mà không component re-render
+ * - Xem như 1 biến bình thường lưu trữ giá trị, không bị tạo mới mỗi lần re-render ---> Thay đổi ref.current mà không làm re-render component
+ * -
  * 
  * # Ref level 2: forwardRef
  * - Làm sao để lấy 1 web component bên trong 1 component ?
@@ -74,3 +87,6 @@ export const DemoReact = () => {
  * # Ref level 3: forwardRef kết hợp userImperativeHandle ---> Trả ra một thể hiện khác của ref
  * - forwardRef vào trong một component, component sẽ sử dụng useImperativeHandle để trả về cho ref những giá trị cần thiết
  */
+
+
+

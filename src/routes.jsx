@@ -43,7 +43,7 @@ export const routes = [
             },
             {
                 element: <DemoReact />,
-                path: '/ref'
+                path: '/demo-react'
             },
             {
                 element: <Contact />,
