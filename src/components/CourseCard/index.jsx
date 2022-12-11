@@ -3,7 +3,7 @@ import { generatePath, Link } from 'react-router-dom'
 import { PATH } from '../../config/path'
 import Skeleton from '../Skeleton'
 
-export default function CourseCard({ thumbnailUrl, title, short_description, slug, id }) {
+export default function CourseCard({ thumbnailUrl, teacher, title, short_description, slug, id }) {
     const path = generatePath(PATH.courseDetail, { slug, id })
     const registerPath = generatePath(PATH.courseRegister, { slug, id })
 
@@ -22,9 +22,9 @@ export default function CourseCard({ thumbnailUrl, title, short_description, slu
                 <div className="bottom">
                     <div className="teacher">
                         <div className="avatar">
-                            <img src="img/avt.png" alt="" />
+                            <img src={teacher.avatar} alt="" />
                         </div>
-                        <div className="name">Vương Đặng</div>
+                        <div className="name">{teacher.title}</div>
                     </div>
                     <Link to={registerPath} className="register-btn">Đăng Ký</Link>
                 </div>
