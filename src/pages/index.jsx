@@ -4,6 +4,8 @@ import { useScrollTop } from '../hooks/useScrollTop'
 import { courseService } from '../services/course.service'
 import { Modal } from '../components/Modal'
 import { AspectRatio } from '../components/AspectRatio'
+import { Testimonial } from '../components/Testimonial'
+import { TeamSlider } from '../components/TeamSlider'
 
 export default function Home() {
     const [courses, setCourses] = useState([])
@@ -22,11 +24,15 @@ export default function Home() {
             .finally(() => {
                 setLoading(false)
             })
+
+
+
+        
     }, [])
     return (
         <main className="homepage" id="main">
             <Modal visible={isOpenVideoModal} maskClosable={false} onCancel={() => setIsOpenVideoModal(false)}>
-                <AspectRatio width={1000} ratio={9/16} className="video-src">
+                <AspectRatio width={1000} ratio={9 / 16} className="video-src">
                     <iframe width="100%" height="100%" src="https://www.youtube.com/embed/oTsopKtMS_0?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </AspectRatio>
             </Modal>
@@ -114,188 +120,8 @@ export default function Home() {
                 </div>
             </div>
         </section> */}
-            <section className="section-testimonial">
-                <div className="container">
-                    <div className="textbox">
-                        <h2 className="main-title white">Học viên cảm nhận về Spacedev</h2>
-                    </div>
-                    <div className="testimonial">
-                        <div className="testimonial-item">
-                            <div className="item">
-                                <div className="text">
-                                    <div className="ct ct-1 active">
-                                        <div className="info">
-                                            <div className="name">
-                                                <h4>Đặng Thuyền Vương</h4>
-                                                <p>Thành viên Spacedev 1</p>
-                                            </div>
-                                            <div className="quotes"><img src="img/quotes.svg" alt="" /></div>
-                                        </div>
-                                        <div className="content">
-                                            Mentor có tâm, tận tình. Mình tìm được hướng đi trong lập trình front-end qua
-                                            khóa học. Nơi chọn lựa an tâm cho mọi người.
-                                        </div>
-                                        <div className="bottom">
-                                            <a href="#" target="_blank"><img src="img/facebook.svg" alt="" /></a>
-                                            <span>09/10/2020</span>
-                                        </div>
-                                    </div>
-                                    <div className="ct ct-2">
-                                        <div className="info">
-                                            <div className="name">
-                                                <h4>Đặng Thuyền Quân</h4>
-                                                <p>Thành viên Spacedev 2</p>
-                                            </div>
-                                            <div className="quotes"><img src="img/quotes.svg" alt="" /></div>
-                                        </div>
-                                        <div className="content">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin libero
-                                            id magna finibus, in maximus urna tincidunt. Nam at leo lacinia, interdum dolor
-                                            in, molestie lectus. Aenean porttitor purus at purus euismod tristique
-                                        </div>
-                                        <div className="bottom">
-                                            <a href="#" target="_blank"><img src="img/facebook.svg" alt="" /></a>
-                                            <span>01/10/2020</span>
-                                        </div>
-                                    </div>
-                                    <div className="ct ct-3">
-                                        <div className="info">
-                                            <div className="name">
-                                                <h4>Lê Châu Hữu Thiện</h4>
-                                                <p>Thành viên Spacedev 3</p>
-                                            </div>
-                                            <div className="quotes"><img src="img/quotes.svg" alt="" /></div>
-                                        </div>
-                                        <div className="content">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin libero
-                                            id magna finibus, in maximus urna tincidunt. Nam at leo lacinia, interdum dolor
-                                            in, molestie lectus. Aenean porttitor purus at purus euismod tristique
-                                        </div>
-                                        <div className="bottom">
-                                            <a href="#" target="_blank"><img src="img/facebook.svg" alt="" /></a>
-                                            <span>01/10/2020</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="images">
-                                    <div className="list">
-                                        <div className="carousel-cell">
-                                            <div className="img">
-                                                <picture>
-                                                    <source media="(max-width: 767px)" srcSet="img/Intersect.png" />
-                                                    <img data-flickity-lazyload="img/tes.jpg" alt="" />
-                                                </picture>
-                                            </div>
-                                            <div className="ct_m">
-                                                <div className="info">
-                                                    <div className="name">
-                                                        <h4>Tiến Tài</h4>
-                                                        <p>Thành viên Spacedev1</p>
-                                                    </div>
-                                                    <div className="quotes"><img src="img/quotes.svg" alt="" /></div>
-                                                </div>
-                                                <div className="content">
-                                                    Mentor có tâm, tận tình. Mình tìm được hướng đi trong lập trình
-                                                    front-end qua
-                                                    khóa học. Like cho 4 mentor.
-                                                </div>
-                                                <div className="bottom">
-                                                    <a href="#" target="_blank"><img src="img/facebook.svg" alt="" /></a>
-                                                    <span>09/10/2020</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="carousel-cell">
-                                            <div className="img">
-                                                <picture>
-                                                    <source media="(max-width: 767px)" srcSet="img/Intersect.png" />
-                                                    <img data-flickity-lazyload="img/tes.jpg" alt="" />
-                                                </picture>
-                                            </div>
-                                            <div className="ct_m">
-                                                <div className="info">
-                                                    <div className="name">
-                                                        <h4>Nguyễn Văn Tuấn</h4>
-                                                        <p>Thành viên Spacedev1</p>
-                                                    </div>
-                                                    <div className="quotes"><img src="img/quotes.svg" alt="" /></div>
-                                                </div>
-                                                <div className="content">
-                                                    Mentor có tâm, tận tình. Mình tìm được hướng đi trong lập trình
-                                                    front-end qua
-                                                    khóa học. Like cho 4 mentor.
-                                                </div>
-                                                <div className="bottom">
-                                                    <a href="#" target="_blank"><img src="img/facebook.svg" alt="" /></a>
-                                                    <span>09/10/2020</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="carousel-cell">
-                                            <div className="img">
-                                                <picture>
-                                                    <source media="(max-width: 767px)" srcSet="img/Intersect.png" />
-                                                    <img data-flickity-lazyload="img/tes.jpg" alt="" />
-                                                </picture>
-                                            </div>
-                                            <div className="ct_m">
-                                                <div className="info">
-                                                    <div className="name">
-                                                        <h4>Phạm Thành Trung</h4>
-                                                        <p>Thành viên Spacedev1</p>
-                                                    </div>
-                                                    <div className="quotes"><img src="img/quotes.svg" alt="" /></div>
-                                                </div>
-                                                <div className="content">
-                                                    Mentor có tâm, tận tình. Mình tìm được hướng đi trong lập trình
-                                                    front-end qua
-                                                    khóa học. Like cho 4 mentor.
-                                                </div>
-                                                <div className="bottom">
-                                                    <a href="#" target="_blank"><img src="img/facebook.svg" alt="" /></a>
-                                                    <span>09/10/2020</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="dots" />
-                            <div className="btn_ctr prev" />
-                            <div className="btn_ctr next" />
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="section-gallery">
-                <div className="textbox">
-                    <h2 className="main-title">Chúng ta là một team</h2>
-                </div>
-                <div className="list">
-                    <img data-flickity-lazyload="./img/img_team1.png" alt="" />
-                    <img data-flickity-lazyload="./img/img_team2.png" alt="" />
-                    <img data-flickity-lazyload="./img/img_team3.png" alt="" />
-                    <img data-flickity-lazyload="./img/img_team4.png" alt="" />
-                    <img data-flickity-lazyload="./img/img_team3.png" alt="" />
-                    <img data-flickity-lazyload="./img/img_team4.png" alt="" />
-                    <img data-flickity-lazyload="./img/img_team1.png" alt="" />
-                    <img data-flickity-lazyload="./img/img_team2.png" alt="" />
-                    <img data-flickity-lazyload="./img/img_team3.png" alt="" />
-                    <img data-flickity-lazyload="./img/img_team4.png" alt="" />
-                    <img data-flickity-lazyload="./img/img_team3.png" alt="" />
-                    <div className="item carousel-cell">
-                        <img data-flickity-lazyload="./img/img_team4.png" alt="" />
-                    </div>
-                </div>
-                <div className="controls">
-                    <div className="btn_ctr prev" />
-                    <span>Trượt qua</span>
-                    <div className="timeline">
-                        <div className="process" />
-                    </div>
-                    <div className="btn_ctr next" />
-                </div>
-            </section>
+            <Testimonial />
+            <TeamSlider />
             <section className="section-action">
                 <div className="container">
                     <h3>Bạn đã sẵn sàng trở thành chiến binh tiếp theo của Team Spacedev chưa?</h3>
