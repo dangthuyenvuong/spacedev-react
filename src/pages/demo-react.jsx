@@ -58,7 +58,7 @@ export const DemoReact = () => {
                     </label>
                     <label>
                         <p>Nội dung<span>*</span></p>
-                        <textarea name="content" id cols={30} rows={10} defaultValue={""} />
+                        <textarea name="content" cols={30} rows={10} defaultValue={""} />
                     </label>
                 </form>
 
