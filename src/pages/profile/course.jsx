@@ -1,76 +1,55 @@
 import React, { useState } from 'react'
-
+import { useFetch } from '../../hooks/useFetch'
+import { courseService } from '../../services/course.service'
+import Skeleton from '../../components/Skeleton'
+import moment from 'moment/moment'
+import { generatePath, Link } from 'react-router-dom'
+import { PATH } from '../../config/path'
 export default function MyCourse() {
-    const [tabActive, setTabActive] = useState(1)
-    const onChangeTab = (ev, tab) => {
-        ev.preventDefault()
-        setTabActive(tab)
-    }
+    const { loading, data: courses } = useFetch(() => courseService.getMyCourse())
 
+    if (loading) return <>
+        {
+            Array.from(Array(3)).map((_, i) => <div key={i} className="mb-5"><Skeleton height={250} /></div>)
+        }
+    </>
     return (
         <div className="tab2">
-            <div className="item">
-                <div className="cover">
-                    <img src="/img/img3.png" alt="" />
-                </div>
-                <div className="info">
-                    <a href="#" className="name">
-                        Reactjs Advanced
-                    </a>
-                    <div className="date">Khai giảng ngày 09/09/2019</div>
-                    <div className="row">
-                        <div >
-                            <img src="/img/clock.svg" alt="" className="icon" />54 giờ
+            {
+                courses.map(e => (
+                    <div key={e.course_id} className="item">
+                        <div className="cover">
+                            <img src={e.course.thumbnailUrl} alt="" />
                         </div>
-                        <div >
-                            <img src="/img/play.svg" alt="" className="icon" />25 video
-                        </div>
-                        <div >
-                            <img src="/img/user.svg" alt="" className="icon" />20 học viên
-                        </div>
-                    </div>
-                    <div className="process">
-                        <div className="line">
-                            <div className="rate" style={{ width: '30%' }} />
-                        </div>
-                        30%
-                    </div>
-                    <div className="btn overlay round btn-continue">
-                        Tiếp tục học
-                    </div>
-                </div>
-            </div>
-            <div className="item">
-                <div className="cover">
-                    <img src="/img/img7.png" alt="" />
-                </div>
-                <div className="info">
-                    <a href="#" className="name">
-                        Nodejs Advanced
-                    </a>
-                    <div className="date">Khai giảng ngày 09/09/2019</div>
-                    <div className="row">
-                        <div >
-                            <img src="/img/clock.svg" alt="" className="icon" />54 giờ
-                        </div>
-                        <div >
-                            <img src="/img/play.svg" alt="" className="icon" />25 video
-                        </div>
-                        <div >
-                            <img src="/img/user.svg" alt="" className="icon" />20 học viên
+                        <div className="info">
+                            <a href="#" className="name">
+                                {e.course.title}
+                            </a>
+                            <div className="date">Khai giảng ngày {moment(e.opening_time).format('DD/MM/YYYY')}</div>
+                            <div className="row">
+                                <div >
+                                    <img src="/img/clock.svg" alt="" className="icon" />{e.total_hours} giờ
+                                </div>
+                                <div >
+                                    <img src="/img/play.svg" alt="" className="icon" />{e.video} video
+                                </div>
+                                <div >
+                                    <img src="/img/user.svg" alt="" className="icon" />{e.student} học viên
+                                </div>
+                            </div>
+                            <div className="process">
+                                <div className="line">
+                                    <div className="rate" style={{ width: `${e.process}%` }} />
+                                </div>
+                                {e.process}%
+                            </div>
+                            <Link to={generatePath(PATH.courseDetail, { id: e.course.id, slug: e.course.slug })} className="btn overlay round btn-continue">
+                                Tiếp tục học
+                            </Link>
                         </div>
                     </div>
-                    <div className="process">
-                        <div className="line">
-                            <div className="rate" style={{ width: '30%' }} />
-                        </div>
-                        30%
-                    </div>
-                    <div className="btn overlay round btn-continue">
-                        Tiếp tục học
-                    </div>
-                </div>
-            </div>
+                ))
+            }
         </div>
     )
 }

@@ -13,5 +13,11 @@ export const courseService = {
 
     getRelated(id) {
         return api.get(`${COURSE_API}/related/${id}`)
+    },
+    register(id, data) {
+        return api.post(`${COURSE_API}/register/${id}`, data)
+    },
+    getMyCourse() {
+        return api.get(`${COURSE_API}/my-course`)
     }
 }

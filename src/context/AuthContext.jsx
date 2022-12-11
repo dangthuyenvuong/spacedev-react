@@ -1,6 +1,6 @@
 import { message } from "antd";
 import { createContext, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { generatePath, useLocation, useNavigate } from "react-router-dom";
 import { PATH } from "../config/path";
 import { authService } from '../services/auth.service';
 import { userService } from "../services/user.service";
@@ -9,6 +9,7 @@ const Context = createContext({})
 
 export const AuthProvider = ({ children }) => {
     const navigate = useNavigate()
+    const { state } = useLocation()
     const [user, _setUser] = useState(getUser)
     const login = async (data) => {
         try {
@@ -19,10 +20,13 @@ export const AuthProvider = ({ children }) => {
                 _setUser(user.data)
                 setUser(user.data)
                 message.success('Đăng nhập tài khoản thành công')
-                navigate(PATH.profile.index)
+                if (state?.redirect) {
+                    navigate(state.redirect)
+                } else {
+                    navigate(PATH.profile.index)
+                }
             }
         } catch (err) {
-            console.error(err);
             if (err?.response?.data?.message) {
                 message.error(err.response.data.message)
             }
