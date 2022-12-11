@@ -55,7 +55,7 @@ export const DemoReact = () => {
                     </label>
                     <label>
                         <p>Nội dung<span>*</span></p>
-                        <textarea name id cols={30} rows={10} defaultValue={""} />
+                        <textarea cols={30} rows={10} defaultValue={""} />
                     </label>
                     <button className="btn main rect">đăng ký</button>
                     {/* COUNT: {count} */}
