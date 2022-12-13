@@ -9,5 +9,11 @@ export const userService = {
     },
     resendEmail(data) {
         return api.post(`${USER_API}/resend-email`, data)
+    },
+    sendEmailResetPassword(data) {
+        return api.post(`${USER_API}/reset-password`, data)
+    },
+    resetPasswordByCode(data) {
+        return api.post(`${USER_API}/change-password-by-code`, data)
     }
 }
