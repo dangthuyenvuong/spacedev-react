@@ -9,5 +9,8 @@ export const userService = {
     },
     resendEmail(data) {
         return api.post(`${USER_API}/resend-email`, data)
+    },
+    updateProfile(data) {
+        return api.patch(`${USER_API}`, data)
     }
 }
