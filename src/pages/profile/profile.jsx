@@ -8,11 +8,11 @@ import { handleError } from '@/utils/handleError'
 import { regexp, required } from '@/utils/validate'
 import { message } from 'antd'
 import React from 'react'
+
 export default function Profile() {
 
     const { user, setUser } = useAuth()
-    const { loading, excute: updateProfileService } = useAsync(userService.updateProfile)
-
+    const { loading, excute: updateInfoService } = useAsync(userService.updateInfo)
     const { register, values, validate } = useForm({
         name: [
             required()
@@ -26,14 +26,15 @@ export default function Profile() {
             regexp('url')
         ]
     }, user)
+
     const onSubmit = async () => {
         try {
-            if (validate()) {
-                const res = await updateProfileService(values)
+            if(validate()) {
+                const res = await updateInfoService(values)
+                console.log(res)
                 setUser(res.data)
                 message.success('Bạn đã cập nhật thông tin tài khoản thành công')
             }
-
         } catch (err) {
             handleError(err)
         }
@@ -41,10 +42,11 @@ export default function Profile() {
 
     return (
         <div className="tab1">
-            <Field label="Họ và tên" requried placeholder="Nguyễn Văn A" {...register('name')} />
-            <Field label="Số điện thoại" required placeholder="0949******" {...register('phone')} />
-            <Field label="Email" disabled  {...register('username')} />
-            <Field label="Facebook" placeholder="Facebook url" {...register('fb')} />
+            <Field {...register('name')} placeholder="Nguyễn Văn A" label="Họ và tên" required/>
+            <Field {...register('phone')} placeholder="0949******" label="Số điện thoại" required/>
+            <Field {...register('username')} disabled label="Email"/>
+            <Field {...register('fb')} placeholder="Facebook url" label="Facebook" required />
+           
             <Button loading={loading} onClick={onSubmit}>LƯU LẠI</Button>
         </div>
     )
