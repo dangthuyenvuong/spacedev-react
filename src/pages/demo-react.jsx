@@ -14,6 +14,18 @@ import { Input } from '../components/Input'
  */
 
 export const DemoReact = () => {
+
+    const [render, renderCount] = useState(0)
+    useEffect(() => {
+        const timerId = setInterval(() => {
+            renderCount(render => render + 1)
+        }, 100)
+        return () => {
+            clearInterval(timerId)
+        }
+    }, [])
+
+
     const inputPhoneId = useId()
     const inputEmailId = useId()
     
@@ -22,7 +34,6 @@ export const DemoReact = () => {
         inputRef.current.setValue('Dang Thuyen Vuong')
     }, [])
 
-    console.log(inputPhoneId, inputEmailId)
     return (
         <main className="register-course" id="main">
             <section className="section-1 wrap container">
@@ -32,10 +43,11 @@ export const DemoReact = () => {
                     Đừng ngần ngại liên hệ với <strong>Spacedev</strong> để cùng nhau tạo ra những sản phẩm giá trị, cũng như
                     việc hợp tác với các đối tác tuyển dụng và công ty trong và ngoài nước.
                 </p>
+                Render : {render}
                 <form className="form">
                     <label>
                         <p>Họ và tên<span>*</span></p>
-                        <Input ref={inputRef} type="text" placeholder="Họ và tên bạn" />
+                        <Input random={Math.random()} ref={inputRef} type="text" placeholder="Họ và tên bạn" />
                     </label>
                     <label>
                         <p>Số điện thoại</p>
@@ -77,3 +89,10 @@ export const DemoReact = () => {
         </main>
     )
 }
+
+/**
+ * memo: memorize 1 component, khi props thay đổi thì component re-render
+ * 
+ * equalFun: Hàm so sánh, return true nếu newProps === oldProps và không re-render
+ * Sử dụng equalFun khi chỉ muốn component re-render trong một vài props thay đổi
+ */
