@@ -15,6 +15,8 @@ const fibonaci = (n) => {
 }
 
 export const DemoReact = () => {
+    const {} = useAuth()
+    
     const [render, renderCount] = useState(0)
     useEffect(() => {
         const timerId = setInterval(() => {
