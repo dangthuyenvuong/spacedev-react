@@ -16,6 +16,12 @@ export default function MyCourse() {
     return (
         <div className="tab2">
             {
+                courses.length === 0 && (
+                    <p>Bạn hiện tại không có đăng ký khóa học nào, vui lòng đăng ký khóa học rồi quay trở lại</p>
+                )
+            }
+
+            {
                 courses.map(e => (
                     <div key={e.course_id} className="item">
                         <div className="cover">

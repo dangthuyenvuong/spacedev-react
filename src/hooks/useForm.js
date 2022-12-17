@@ -1,3 +1,4 @@
+import { useCallback } from "react"
 import { useState } from "react"
 import { validate } from "../utils/validate"
 
@@ -10,6 +11,7 @@ export const useForm = (rules, initialValue = {}) => {
     const [values, setValues] = useState(initialValue)
     const [errors, setError] = useState({})
 
+
     const register = (name) => {
         return {
             error: errors[name],
@@ -21,11 +23,9 @@ export const useForm = (rules, initialValue = {}) => {
                         [name]: rules[name]
                     },_values)
 
-                    setError({ ...errors, [name]: error[name] || '' })
+                    setError(prev => ({ ...prev, [name]: error[name] || '' }))
                 }
-
-
-                setValues(_values)
+                setValues((prev) => ({ ...prev, [name]: ev.target.value }))
             }
         }
     }

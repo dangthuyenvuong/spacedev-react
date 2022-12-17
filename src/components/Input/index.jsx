@@ -1,9 +1,11 @@
 import { ErrorText, InputStyle } from "./style"
 import classNames from "classnames"
 import { forwardRef, useImperativeHandle, useRef } from "react"
+import { memo } from "react"
 
-export const Input = forwardRef(({ error, className, type = 'text', ...props }, ref) => {
+export const Input = memo(forwardRef(({ error, className, type = 'text', ...props }, ref) => {
     const inputRef = useRef()
+    console.log('re-render')
     useImperativeHandle(ref, () => {
         return {
             setValue: (value) => {
@@ -18,4 +20,6 @@ export const Input = forwardRef(({ error, className, type = 'text', ...props }, 
             {error && <ErrorText>{error}</ErrorText>}
         </InputStyle>
     )
+}), (prevProps, nextProps) => {
+    return prevProps.value === nextProps.value && prevProps.error === nextProps.error
 })

@@ -10,7 +10,8 @@ const ErrorP = styled.span`
     font-style: italic;
 `
 
-export default function Field({ label, error, required, type = 'text', renderInput, ...rest }) {
+export const Field = React.memo(({ label, error, required, type = 'text', renderInput, ...rest }) => {
+    console.log('render', rest.value)
     return (
         <label className='relative'>
             <p>{label}{required && <span>*</span>}</p>
@@ -20,4 +21,8 @@ export default function Field({ label, error, required, type = 'text', renderInp
             {error && <ErrorP>{error}</ErrorP>}
         </label>
     )
-}
+}, (prevProps, nextProps) => {
+    return prevProps.value === nextProps.value && prevProps.error === nextProps.error
+}) 
+
+export default Field

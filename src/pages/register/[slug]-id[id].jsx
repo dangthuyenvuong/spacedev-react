@@ -54,7 +54,9 @@ export default function Register() {
 
     }, {
         name: user?.name,
-        email: user?.username
+        email: user?.username,
+        fb: user?.fb,
+        phone: user?.phone
     })
     const [isSuccess, setIsSuccess] = useState(false)
 
@@ -63,6 +65,8 @@ export default function Register() {
             if (validate()) {
                 await registerService(id, values)
                 setIsSuccess(true)
+            }else {
+                console.log('error')
             }
         } catch (err) {
             console.error(err)
