@@ -13,18 +13,20 @@ const fibonaci = (n) => {
 }
 
 export const DemoReact = () => {
-    const [, setRandom] = useState(0)
+    const [render, renderCount] = useState(0)
     useEffect(() => {
-        setInterval(() => {
-            setRandom(Math.random())
+        const timerId = setInterval(() => {
+            console.log('aaaaaaaa')
+            renderCount(render => render + 1)
         }, 100)
+        return () => {
+            clearInterval(timerId)
+        }
     }, [])
 
 
     const renderCountRef = useRef(0)
     const [count, setCount] = useState(0)
-
-    renderCountRef.current++
 
     const value = useMemo(() => fibonaci(count), [count])
 
@@ -32,7 +34,7 @@ export const DemoReact = () => {
         <main className="register-course" id="main">
             <section className="section-1 wrap container">
                 {/* <div class="main-sub-title">liên hệ</div> */}
-                <h2 className="main-title">Số lần render: {renderCountRef.current}</h2>
+                <h2 className="main-title">Số lần render: {render}</h2>
                 Count: {count} <br />
                 Fibonaci: {value} <br />
                 <Button onClick={() => setCount(count + 1)}>+1</Button>
