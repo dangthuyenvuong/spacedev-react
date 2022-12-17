@@ -40,3 +40,11 @@ export const DemoReact = () => {
         </main>
     )
 }
+
+
+/**
+ * Khi chúng ta có một logic tính toán phức tạp tốn nhiều tài nguyên, mỗi lần component re-render làm cho việc tính toán đc thực thi lại
+ * thì sử dụng useMemo để cache giá trị tính toán đó lại
+ * 
+ * Khi re-render xẩy ra, giá trị chỉ được tính toán lại khi có sự thay đổi của dependencyList
+ */
