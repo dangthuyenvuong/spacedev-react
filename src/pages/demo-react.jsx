@@ -25,7 +25,6 @@ export const DemoReact = () => {
     }, [])
 
 
-    const renderCountRef = useRef(0)
     const [count, setCount] = useState(0)
 
     const value = useMemo(() => fibonaci(count), [count])
@@ -45,6 +44,8 @@ export const DemoReact = () => {
 
 
 /**
+ * useRef: memorize value sau khi được tính toán phức tạp
+ * 
  * Khi chúng ta có một logic tính toán phức tạp tốn nhiều tài nguyên, mỗi lần component re-render làm cho việc tính toán đc thực thi lại
  * thì sử dụng useMemo để cache giá trị tính toán đó lại
  * 
