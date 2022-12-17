@@ -29,7 +29,7 @@ export const DemoReact = () => {
     const [count, setCount] = useState(0)
 
     const value = useMemo(() => fibonaci(count), [count])
-    const onIncre = useCallback(() => setCount(prev => prev + 1), [])
+    const onClick = useCallback(() => setCount(prev => prev + 1), [])
 
 
 
@@ -37,10 +37,10 @@ export const DemoReact = () => {
         <main className="register-course">
             <section className="section-1 wrap container">
                 {/* <div class="main-sub-title">liên hệ</div> */}
-                <h2 className="main-title">Số lần  render: {renderRef.current}</h2>
+                <h2 className="main-title">Số lần  render: {render}</h2>
                 Count: {count} <br />
                 Fibonaci: {value} <br />
-                <Button onClick={onIncre}>+1</Button>
+                <Button onClick={onClick}>+1</Button>
 
             </section>
         </main>

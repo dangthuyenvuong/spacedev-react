@@ -13,7 +13,6 @@ export const AuthProvider = ({ children }) => {
     const [render, renderCount] = useState(0)
     useEffect(() => {
         const timerId = setInterval(() => {
-            console.log('aaaaaaaaaa')
             renderCount(render => render + 1)
         }, 100)
         return () => {
