@@ -12,6 +12,7 @@ import { currency } from '../../utils/currency'
 import moment from 'moment'
 import { Teacher } from '../../components/Teacher'
 import Page404 from '../404'
+import { useMemo } from 'react'
 
 
 
@@ -33,7 +34,20 @@ export default function CourseDetail() {
 
     const { data: detail, loading } = useFetch(() => courseService.getCourseDetail(id), [id])
 
-    const { data: related, loading: relatedLoading } = useFetch(() => courseService.getRelated(id), [id])
+    const { data: related = [], loading: relatedLoading } = useFetch(() => courseService.getRelated(id), [id])
+    console.log('re-render')
+
+    const { openingTime, registerPath } = useMemo(() => {
+        console.log('useMemo')
+        if (detail) {
+            return {
+                registerPath: generatePath(PATH.courseRegister, { slug: detail.slug, id: detail.id }),
+                openingTime: moment(detail.opening_time).format('DD/MM/YYYY')
+            }
+        }
+        return {}
+
+    }, [detail])
 
     if (loading) {
         return (
@@ -63,8 +77,7 @@ export default function CourseDetail() {
     }
 
     if (!detail) return <Page404 />
-    const registerPath = generatePath(PATH.courseRegister, { slug: detail.slug, id: detail.id })
-    const openingTime = moment(detail.opening_time).format('DD/MM/YYYY')
+
     return (
         <main className="course-detail" id="main">
             <section className="banner style2" style={{ '--background': detail.template_color_banner || '#dce6fb' }}>
@@ -114,7 +127,7 @@ export default function CourseDetail() {
                     </div>
                     <h3 className="title">hình thức học</h3>
                     <div className="row row-check">
-                    {
+                        {
                             detail.benefits.map((e, i) => <div className="col-md-6" key={i}>{e.content}</div>)
                         }
                     </div>
