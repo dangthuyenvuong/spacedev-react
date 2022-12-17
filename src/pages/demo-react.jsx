@@ -42,6 +42,12 @@ export const DemoReact = () => {
     )
 }
 
+/**
+ * memo: memorize 1 component, khi props thay đổi thì component re-render
+ * 
+ * equalFun: Hàm so sánh, return true nếu newProps === oldProps và không re-render
+ * Sử dụng equalFun khi chỉ muốn component re-render trong một vài props thay đổi
+ */
 
 /**
  * useRef: memorize value sau khi được tính toán phức tạp
