@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useRoutes } from 'react-router-dom'
 import './assets/css/taildwin.css'
 import './assets/css/custom.css'
@@ -12,7 +12,9 @@ function App() {
   const element = useRoutes(routes)
 
   return (
-    element
+    <Suspense fallback={<div>Loading....</div>}>
+      {element}
+    </Suspense>
     // <Routes>
     //   <Route element={<MainLayout user={user} />}>
     //     <Route index element={<Home />} />

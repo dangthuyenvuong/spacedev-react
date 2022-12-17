@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Project() {
     return (
-        <main className="projectpage" id="main">
+        <main className="projectpage">
             <section className="section-1">
                 <div className="container">
                     <h2 className="main-title">dự án</h2>

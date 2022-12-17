@@ -51,7 +51,7 @@ export default function CourseDetail() {
 
     if (loading) {
         return (
-            <main className="course-detail" id="main">
+            <main className="course-detail" >
                 <section className="banner style2" style={{ '--background': '#cde6fb' }}>
                     <div className="container">
                         <div className="info">

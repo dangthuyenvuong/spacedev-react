@@ -1,29 +1,33 @@
+import { lazy } from "react";
 import { AuthRoute } from "./components/AuthRoute";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { PATH } from "./config/path";
-import MainLayout from "./layouts/MainLayout";
-import ProfileLayout from "./layouts/ProfileLayout";
-import Home from "./pages";
-import Coin from "./pages/coin";
-import Contact from "./pages/contact";
-import Course from "./pages/course";
-import CourseDetail from "./pages/course/[slug]-id[id]";
-import FAQ from "./pages/faq";
-import Payment from "./pages/payment";
-import MyCoin from "./pages/profile/coin";
-import MyCourse from "./pages/profile/course";
-import MyPayment from "./pages/profile/payment";
-import Profile from "./pages/profile/profile";
-import MyProject from "./pages/profile/project";
-import Project from "./pages/project";
-import Register from "./pages/register/[slug]-id[id]";
-import ResetPassword from "./pages/reset-password";
-import Signin from "./pages/signin";
-import Signup from "./pages/signup";
-import Team from "./pages/team";
-import Page404 from "./pages/404";
-import Demo from "./pages/demo";
 import { DemoReact } from "./pages/demo-react";
+
+
+const MainLayout = lazy(() => import ("./layouts/MainLayout"));
+const ProfileLayout = lazy(() => import ("./layouts/ProfileLayout"));
+const Home = lazy(() => import ("./pages"));
+const Coin = lazy(() => import ("./pages/coin"));
+const Contact = lazy(() => import ("./pages/contact"));
+const Course = lazy(() => import ("./pages/course"));
+const CourseDetail = lazy(() => import ("./pages/course/[slug]-id[id]"));
+const FAQ = lazy(() => import ("./pages/faq"));
+const Payment = lazy(() => import ("./pages/payment"));
+const MyCoin = lazy(() => import ("./pages/profile/coin"));
+const MyCourse = lazy(() => import ("./pages/profile/course"));
+const MyPayment = lazy(() => import ("./pages/profile/payment"));
+const Profile = lazy(() => import ("./pages/profile/profile"));
+const MyProject = lazy(() => import ("./pages/profile/project"));
+const Project = lazy(() => import ("./pages/project"));
+const Register = lazy(() => import ("./pages/register/[slug]-id[id]"));
+const ResetPassword = lazy(() => import ("./pages/reset-password"));
+const Signin = lazy(() => import ("./pages/signin"));
+const Signup = lazy(() => import ("./pages/signup"));
+const Team = lazy(() => import ("./pages/team"));
+const Page404 = lazy(() => import ("./pages/404"));
+const Demo = lazy(() => import ("./pages/demo"));
+
 
 
 

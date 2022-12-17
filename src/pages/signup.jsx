@@ -66,7 +66,7 @@ export default function Signup() {
     }
 
     return (
-        <main className="auth" id="main">
+        <main className="auth">
             {
                 isSignupSuccess ? (
                     <div className='container wrap flex flex-col text-center gap-10'>

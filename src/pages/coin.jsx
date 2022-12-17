@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Coin() {
     return (
-        <main className="paypage" id="main">
+        <main className="paypage">
             <div className="container">
                 <section>
                     <h2 className="main-title">Giới thiệu Coin</h2>

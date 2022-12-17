@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Navigate, NavLink, Outlet } from 'react-router-dom'
 import { PATH } from '../config/path'
 import { useAuth } from '../context/AuthContext'
@@ -9,7 +9,7 @@ export default function ProfileLayout() {
 
 
     return (
-        <main className="profile" id="main">
+        <div className="profile">
             <section>
                 <div className="top-info">
                     <div className="avatar">
@@ -30,11 +30,13 @@ export default function ProfileLayout() {
                             <NavLink to={PATH.profile.coin}>Quản lý COIN của tôi</NavLink>
                         </div>
                         <div className="tab-content">
-                            <Outlet />
+                            <Suspense fallback={<div>Profile loading....</div>}>
+                                <Outlet />
+                            </Suspense>
                         </div>
                     </div>
                 </div>
             </section>
-        </main>
+        </div>
     )
 }

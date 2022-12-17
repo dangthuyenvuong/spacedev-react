@@ -88,7 +88,7 @@ export default function Register() {
     }
 
     return (
-        <main className="register-course" id="main">
+        <main className="register-course">
             <section>
 
                 {

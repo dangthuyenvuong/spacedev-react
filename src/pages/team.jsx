@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Team() {
     return (
-        <main className="team" id="main">
+        <main className="team">
             <section>
                 <div className="container">
                     <div className="top">

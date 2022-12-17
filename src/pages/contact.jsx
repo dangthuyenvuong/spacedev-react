@@ -53,7 +53,7 @@ export default function Contact() {
 
 
     return (
-        <main className="register-course" id="main">
+        <main className="register-course">
 
             <section className="section-1 wrap container">
                 {

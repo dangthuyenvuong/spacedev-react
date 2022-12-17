@@ -30,7 +30,7 @@ export default function Home() {
         
     }, [])
     return (
-        <main className="homepage" id="main">
+        <main className="homepage">
             <Modal visible={isOpenVideoModal} maskClosable={false} onCancel={() => setIsOpenVideoModal(false)}>
                 <AspectRatio width={1000} ratio={9 / 16} className="video-src">
                     <iframe width="100%" height="100%" src="https://www.youtube.com/embed/oTsopKtMS_0?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

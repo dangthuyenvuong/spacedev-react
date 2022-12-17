@@ -51,7 +51,7 @@ export default function Signin() {
 
 
     return (
-        <main className="auth" id="main">
+        <main className="auth">
             <div className="wrap">
                 {/* login-form */}
                 <div className="ct_login" >

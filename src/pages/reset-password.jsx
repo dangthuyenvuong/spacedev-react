@@ -66,7 +66,7 @@ export default function ResetPassword() {
     }
 
     return (
-        <main className="auth" id="main">
+        <main className="auth">
             {
                 code ? (
                     <div className="wrap">

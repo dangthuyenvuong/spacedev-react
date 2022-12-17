@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Payment() {
     return (
-        <main className="paypage" id="main">
+        <main className="paypage">
             <div className="container">
                 <section>
                     <h2 className="main-title">thanh toán</h2>

@@ -4,7 +4,7 @@ import { Accordion } from '../components/Accordion'
 
 export default function FAQ() {
     return (
-        <main className="faqpage" id="main">
+        <main className="faqpage">
             <div className="container">
                 <section>
                     <h2 className="main-title">Câu hỏi thường gặp</h2>

@@ -6,7 +6,7 @@ import { courseService } from '../../services/course.service'
 export default function Course() {
     const { data, loading } = useFetch(() => courseService.getCourse())
     return (
-        <main className="homepage" id="main">
+        <main className="homepage">
             <section className="section-1">
                 <div className="container">
                     <h2 className="main-title">KHÓA HỌC SPACEDEV</h2>
