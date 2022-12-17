@@ -15,26 +15,19 @@ const fibonaci = (n) => {
 }
 
 export const DemoReact = () => {
-    const [random, setRandom] = useState(Math.random())
-    const ref = useRef(0)
-    useLayoutEffect(() => {
-
-        if (ref.current % 50 === 0) {
-            setRandom(Math.floor(Math.random() * 100))
+    const [render, renderCount] = useState(0)
+    useEffect(() => {
+        const timerId = setInterval(() => {
+            renderCount(render => render + 1)
+        }, 100)
+        return () => {
+            clearInterval(timerId)
         }
-        
-        if(ref.current % 50 > 1){
-            setRandom(Math.random())
-        }
+    }, [])
 
-        ref.current++
-        
 
-    }, [random])
-
-    const renderRef = useRef(0)
-    renderRef.current++
     const [count, setCount] = useState(0)
+
     const value = useMemo(() => fibonaci(count), [count])
     const onIncre = useCallback(() => setCount(prev => prev + 1), [])
 
@@ -48,8 +41,6 @@ export const DemoReact = () => {
                 Count: {count} <br />
                 Fibonaci: {value} <br />
                 <Button onClick={onIncre}>+1</Button>
-                Random: {random}
-                <Button onClick={() => setRandom(Math.random())}>Change random</Button>
 
             </section>
         </main>
