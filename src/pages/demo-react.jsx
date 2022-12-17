@@ -16,9 +16,13 @@ const fibonaci = (n) => {
 export const DemoReact = () => {
     const [render, renderCount] = useState(0)
     useEffect(() => {
-        setInterval(() => {
+        const timerId = setInterval(() => {
+            console.log('aaaaaaaa')
             renderCount(render => render + 1)
         }, 100)
+        return () => {
+            clearInterval(timerId)
+        }
     }, [])
 
 
