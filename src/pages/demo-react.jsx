@@ -56,7 +56,7 @@ export const DemoReact = () => {
  */
 
 /**
- * useRef: memorize value sau khi được tính toán phức tạp
+ * useMemo: memorize value sau khi được tính toán phức tạp
  * 
  * Khi chúng ta có một logic tính toán phức tạp tốn nhiều tài nguyên, mỗi lần component re-render làm cho việc tính toán đc thực thi lại
  * thì sử dụng useMemo để cache giá trị tính toán đó lại
