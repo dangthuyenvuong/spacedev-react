@@ -1,4 +1,6 @@
 import { Input } from '@/components/Input'
+import { useMemo } from 'react'
+import { useDeferredValue } from 'react'
 import { useState, useTransition } from 'react'
 
 export const DemoReact = () => {
@@ -8,13 +10,6 @@ export const DemoReact = () => {
     // }, [value])
 
     const [value, setValue] = useState('')
-    const [isPending, startTransition] = useTransition()
-
-
-    let list = []
-    for (let i = 0; i < 10000; i++) {
-        list.push(<div key={i}>{value}</div>)
-    }
 
     return (
         <main className="auth">
@@ -24,20 +19,33 @@ export const DemoReact = () => {
                     <h2 className="title">Search</h2>
 
                     <div className="flex">
-                        <Input onChange={ev => {
-                            startTransition(() => {
-                                setValue(ev.target.value)
-                            })
-                        }} placeholder="Search...." />
+                        <Input onChange={ev => setValue(ev.target.value)} placeholder="Search...." />
+                    </div>
 
-                    </div>
-                    <div>
-                        {isPending && <div>Rendering.....</div>}
-                    </div>
-                    {list}
+                    <List value={value} />
                 </div>
             </div>
         </main>
     )
 }
 
+
+
+
+const List = ({ value }) => {
+    const _value = useDeferredValue(value)
+
+
+    const list = useMemo(() => {
+        if(_value) {
+            const list = []
+            for (let i = 0; i < 10000; i++) {
+                list.push(<div key={i}>{_value}</div>)
+            }
+            return list
+        }
+    }, [_value])
+    console.log(_value)
+
+    return list
+}
