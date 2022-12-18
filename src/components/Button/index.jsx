@@ -4,7 +4,6 @@ import { LoadingOutlined } from '@ant-design/icons';
 
 
 export const Button = memo(({ loading, children, ...props }) => {
-    console.log('Button re-render')
     return (
         <ButtonStyle {...props} disabled={loading} className={`btn main rect gap-3 ${props.className ?? ''}`} >
             {loading && <LoadingOutlined style={{ fontSize: 20 }} />}
