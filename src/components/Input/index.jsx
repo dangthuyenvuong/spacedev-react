@@ -5,7 +5,6 @@ import { memo } from "react"
 
 export const Input = memo(forwardRef(({ error, className, type = 'text', ...props }, ref) => {
     const inputRef = useRef()
-    console.log('re-render')
     useImperativeHandle(ref, () => {
         return {
             setValue: (value) => {
