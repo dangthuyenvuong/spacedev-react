@@ -49,7 +49,7 @@ export const DemoReact = () => {
                 Fibonaci: {value} <br />
                 <Button onClick={onIncre}>+1</Button>
                 Random: {random}
-                <Button onClick={() => setRandom(Math.random())}>Change random</Button>
+                <Button onClick={() => setRandom(Math.random())}>set random</Button>
 
             </section>
         </main>
