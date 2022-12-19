@@ -1,10 +1,18 @@
+import { useQuery } from '@/hooks/useQuery'
 import React from 'react'
 import CourseCard, { CourseCardLoading } from '../../components/CourseCard'
 import { useFetch } from '../../hooks/useFetch'
 import { courseService } from '../../services/course.service'
 
 export default function Course() {
-    const { data, loading } = useFetch(() => courseService.getCourse())
+
+    const { data = [], loading, } = useQuery({
+        queryKey: 'courses',
+        cacheTime: 3600000,
+        queryFn: () => courseService.getCourse()
+    })
+
+
     return (
         <main className="homepage">
             <section className="section-1">

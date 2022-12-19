@@ -6,29 +6,31 @@ import { Modal } from '../components/Modal'
 import { AspectRatio } from '../components/AspectRatio'
 import { Testimonial } from '../components/Testimonial'
 import { TeamSlider } from '../components/TeamSlider'
+import { useQuery } from '@/hooks/useQuery'
 
 export default function Home() {
-    const [courses, setCourses] = useState([])
-    const [loading, setLoading] = useState(false)
+    // const [courses, setCourses] = useState([])
+    // const [loading, setLoading] = useState(false)
     const [isOpenVideoModal, setIsOpenVideoModal] = useState(false)
+    const { data: courses = [], loading, } = useQuery({
+        queryKey: 'course-index',
+        cacheTime: 3600000,
+        queryFn: () => courseService.getCourse('?limit=6')
+    })
 
     useScrollTop()
+    // useEffect(() => {
+    //     setLoading(true)
+    //     courseService.getCourse('?limit=6')
+    //         // .then(res => res.json())
+    //         .then(res => {
+    //             setCourses(res.data)
+    //         })
+    //         .finally(() => {
+    //             setLoading(false)
+    //         })
+    // }, [])
 
-    useEffect(() => {
-        setLoading(true)
-        courseService.getCourse('?limit=6')
-            // .then(res => res.json())
-            .then(res => {
-                setCourses(res.data)
-            })
-            .finally(() => {
-                setLoading(false)
-            })
-
-
-
-        
-    }, [])
     return (
         <main className="homepage">
             <Modal visible={isOpenVideoModal} maskClosable={false} onCancel={() => setIsOpenVideoModal(false)}>
