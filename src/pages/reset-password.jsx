@@ -1,7 +1,7 @@
 import Button from '@/components/Button'
 import { Input } from '@/components/Input'
-import { useAuth } from '@/context/AuthContext'
 import { useAsync } from '@/hooks/useAsync'
+import { useAuth } from '@/hooks/useAuth'
 import { useForm } from '@/hooks/useForm'
 import { userService } from '@/services/user.service'
 import { handleError } from '@/utils/handleError'
@@ -15,7 +15,7 @@ import { useSearchParams } from 'react-router-dom'
 export default function ResetPassword() {
 
     const [search] = useSearchParams()
-    const { getProfile } = useAuth()
+    // const { getProfile } = useAuth()
     const [isSuccess, setIsSuccess] = useState(false)
 
     const { excute: sendEmailResetPasswordService, loading: sendEmailResetPasswordLoading } = useAsync(userService.sendEmailResetPassword)

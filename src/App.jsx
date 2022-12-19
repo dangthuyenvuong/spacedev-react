@@ -3,7 +3,7 @@ import { useRoutes } from 'react-router-dom'
 import './assets/css/taildwin.css'
 import './assets/css/custom.css'
 import { routes } from './routes'
-
+import './stores'
 
 function App() {
 
