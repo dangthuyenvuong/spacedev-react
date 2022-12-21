@@ -1,7 +1,13 @@
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { countReducer } from './countReducer'
 import { authReducer } from './authReducer'
 
+
+
+const logMiddleware = store => next => action => {
+    console.log('logMiddleware', store.getState(), action)
+    next(action)
+}
 
 // Gôm nhiều reducer lại thành 1, mỗi reducer phân biệt với nhau bởi tên của reducer
 const reducers = combineReducers({
@@ -10,7 +16,7 @@ const reducers = combineReducers({
 })
 
 // Tạo một redux store
-export const store = createStore(reducers)
+export const store = createStore(reducers, applyMiddleware(logMiddleware))
 
 
 // Lắng nghe sự thay đổi của state, thực hiện callback khi state có thay đổi
