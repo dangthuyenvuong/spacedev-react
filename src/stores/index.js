@@ -40,4 +40,10 @@ export const store = createStore(reducers)
  *      payload: data nếu có
  * 
  * 1 store duy nhất, nhiều reducer, mỗi reducer chỉ quản lý những dữ liệu liên quan reducer đó
+ * 
+ * function reducer: 
+ *  Mỗi reducer sẽ quản lý 1 phần dữ liệu của store
+ *  Khi dispatch, tất cả reducer sẽ được kích hoạt
+ *  reducer cần return về một giá trị, giá trị sẽ được cập nhật vào store. Trong trường hợp return về state cũ, redux sẽ không cần re-render lại
+ *  State là plan object, không lưu function
  */
