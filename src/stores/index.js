@@ -1,6 +1,8 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { countReducer } from './countReducer'
 import { authReducer } from './authReducer'
+import { configureStore } from '@reduxjs/toolkit'
+import { ENV } from '@/config'
 
 
 
@@ -11,15 +13,15 @@ const logMiddleware = store => next => action => {
 }
 
 
-const thunk = store => next => action => {
-    console.log('thunk', action)
-    if(typeof action === 'function') {
-        return action(store.dispatch)
-        
-    }
+// const thunk = store => next => action => {
+//     console.log('thunk', action)
+//     if (typeof action === 'function') {
+//         return action(store.dispatch)
 
-    next(action)
-}
+//     }
+
+//     next(action)
+// }
 
 
 // const logMiddleware2 = store => next => action => {
@@ -38,7 +40,11 @@ const reducers = combineReducers({
 })
 
 // Tạo một redux store
-export const store = createStore(reducers, applyMiddleware(logMiddleware, thunk))
+export const store = configureStore({
+    reducer: reducers,
+    middleware: (getDefaultMiddlware) => getDefaultMiddlware().concat(logMiddleware),
+    devTools: ENV === 'development'
+})
 
 
 // Lắng nghe sự thay đổi của state, thực hiện callback khi state có thay đổi
