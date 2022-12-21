@@ -1,4 +1,4 @@
-import { getUser } from "@/utils/token"
+import { getUser, setToken, setUser } from "@/utils/token"
 import { LOGOUT_ACTION, SET_USER_ACTION } from "./action"
 import { authService } from "@/services/auth.service"
 import { userService } from "@/services/user.service"
@@ -17,7 +17,7 @@ export const loginAction = (data) => {
             const user = await userService.getProfile()
             setUser(user.data)
             dispatch({ type: SET_USER_ACTION, payload: user.data })
-            return user.data
+            data?.success(user.data)
         } catch (err) {
             data?.error(err)
         } finally {

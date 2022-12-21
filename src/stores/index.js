@@ -4,6 +4,7 @@ import { authReducer } from './authReducer'
 
 
 
+
 const logMiddleware = store => next => action => {
     console.log('logMiddleware', store.getState(), action)
     next(action)
@@ -19,6 +20,7 @@ const thunk = store => next => action => {
 
     next(action)
 }
+
 
 // const logMiddleware2 = store => next => action => {
 //     console.log('logMiddleware2', store.getState(), action)
