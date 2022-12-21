@@ -15,7 +15,8 @@ import { Checkbox } from '../../components/Checkbox'
 import { Button } from '../../components/Button'
 import { useAsync } from '../../hooks/useAsync'
 import { message } from 'antd'
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '@/hooks/useAuth'
+// import { useAuth } from '../../context/AuthContext'
 
 
 export default function Register() {

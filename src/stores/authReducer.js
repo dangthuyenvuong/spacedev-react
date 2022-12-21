@@ -1,14 +1,12 @@
 import { getUser } from "@/utils/token"
-import { LOGIN_ACTION, LOGOUT_ACTION, SET_USER_ACTION } from "./action"
+import {  LOGOUT_ACTION, SET_USER_ACTION } from "./action"
 
 const initialState = {
     user: getUser()
 }
 
-export const authReducer = (state = initialState, action) => { 
-    switch(action.type) {
-        case LOGIN_ACTION:
-        
+export const authReducer = (state = initialState, action) => {
+    switch (action.type) {
         case LOGOUT_ACTION:
             return {
                 ...state,
@@ -20,7 +18,7 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 user: action.payload
             }
-        
+
         default: return state
     }
 }

@@ -17,7 +17,7 @@ const Payment = lazy(() => import ("./pages/payment"));
 const MyCoin = lazy(() => import ("./pages/profile/coin"));
 const MyCourse = lazy(() => import ("./pages/profile/course"));
 const MyPayment = lazy(() => import ("./pages/profile/payment"));
-const Profile = lazy(() => import ("./pages/profile/profile"));
+const Profile = lazy(() => import ("./pages/profile"));
 const MyProject = lazy(() => import ("./pages/profile/project"));
 const Project = lazy(() => import ("./pages/project"));
 const Register = lazy(() => import ("./pages/register/[slug]-id[id]"));

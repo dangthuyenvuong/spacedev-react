@@ -1,13 +1,18 @@
 import React, { useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { PATH } from '../../config/path'
-import { useAuth } from '../../context/AuthContext'
+// import { useAuth } from '../../context/AuthContext'
 import { avatarDefault } from '../../config'
+import { useDispatch } from 'react-redux'
+import { LOGOUT_ACTION } from '@/stores/action'
+import { useAuth } from '@/hooks/useAuth'
+import { message } from 'antd'
 
 
 export default function Header() {
-    const { user, logout } = useAuth()
+    const { user } = useAuth()
     const { pathname } = useLocation()
+    const dispatch = useDispatch()
     const onOpenMenu = () => {
         document.body.classList.add('menu-is-show')
     }
@@ -20,6 +25,11 @@ export default function Header() {
         onCloseMenu()
     }, [pathname])
 
+
+    const logout = () => {
+        dispatch({ type: LOGOUT_ACTION })
+        message.success('Đăng xuất tài khoản thành công')
+    }
 
     return (
         <>
@@ -45,7 +55,7 @@ export default function Header() {
                                         <Link to={PATH.profile.index} className="info">
                                             <div className="name">{user.name}</div>
                                             <div className="avatar">
-                                                <img src={user.avatar ? user.avatar: avatarDefault} alt="" />
+                                                <img src={user.avatar ? user.avatar : avatarDefault} alt="" />
                                             </div>
                                         </Link>
                                     </div>

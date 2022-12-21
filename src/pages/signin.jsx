@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import Button from '../components/Button'
 import { Input } from '../components/Input'
 import { PATH } from '../config/path'
@@ -9,7 +9,12 @@ import { minMax, regexp, required } from '../utils/validate'
 import { useAsync } from '../hooks/useAsync'
 import { authService } from '../services/auth.service'
 import { message } from 'antd'
-import { setToken } from '../utils/token'
+import { setToken, setUser } from '../utils/token'
+import { useDispatch } from 'react-redux'
+import { SET_USER_ACTION } from '@/stores/action'
+import { userService } from '@/services/user.service'
+import { handleError } from '@/utils/handleError'
+import { useCallback } from 'react'
 
 
 /**
@@ -26,9 +31,26 @@ import { setToken } from '../utils/token'
  */
 
 export default function Signin() {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const {state} = useLocation()
 
-
-    const { login, } = useAuth()
+    const login = useCallback(async (data) => {
+        try {
+            const res = await authService.login(data)
+            setToken(res.data)
+            const user = await userService.getProfile()
+            setUser(user.data)
+            dispatch({ type: SET_USER_ACTION, payload: user.data })
+            message.success('Đăng nhập tài khoản thành công')
+            if(state?.redirect) {
+                navigate(state.redirect)
+            }
+        } catch (err) {
+            handleError(err)
+        }
+    }, [])
+    // const { login, } = useAuth()
     const { excute: loginService, loading } = useAsync(login)
     const form = useForm({
         username: [
@@ -40,7 +62,6 @@ export default function Signin() {
             minMax(6, 32)
         ]
     })
-    const navigate = useNavigate()
     const _onLogin = async () => {
         if (form.validate()) {
             await loginService(form.values)

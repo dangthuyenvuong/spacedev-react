@@ -1,10 +1,12 @@
 import { createStore, combineReducers } from 'redux'
 import { countReducer } from './countReducer'
+import { authReducer } from './authReducer'
 
 
 // Gôm nhiều reducer lại thành 1, mỗi reducer phân biệt với nhau bởi tên của reducer
 const reducers = combineReducers({
-    count: countReducer
+    count: countReducer,
+    auth: authReducer
 })
 
 // Tạo một redux store
@@ -33,5 +35,9 @@ export const store = createStore(reducers)
  * store: redux store dùng để quản lý global state
  * 
  * subscribe: Lắng nghe sự thay đổi của state, khi state thay đổi redux sẽ thực thi hàm callback
- * dispatch: Hàm trigger 1 event, input là 1 plan object 
+ * dispatch: Hàm trigger 1 event, input là 1 plan object theo quy định: 
+ *      type: Tên của action
+ *      payload: data nếu có
+ * 
+ * 1 store duy nhất, nhiều reducer, mỗi reducer chỉ quản lý những dữ liệu liên quan reducer đó
  */

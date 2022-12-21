@@ -1,8 +1,9 @@
 import React, { Suspense } from 'react'
 import { Navigate, NavLink, Outlet } from 'react-router-dom'
 import { PATH } from '../config/path'
-import { useAuth } from '../context/AuthContext'
+// import { useAuth } from '../context/AuthContext'
 import { avatarDefault } from '../config'
+import { useAuth } from '@/hooks/useAuth'
 
 export default function ProfileLayout() {
     const { user } = useAuth()
