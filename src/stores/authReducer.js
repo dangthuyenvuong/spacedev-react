@@ -3,12 +3,12 @@ import { LOGOUT_ACTION, SET_USER_ACTION } from "./action"
 import { authService } from "@/services/auth.service"
 import { userService } from "@/services/user.service"
 import { handleError } from "@/utils/handleError"
-import { createAction, createSlice } from "@reduxjs/toolkit"
+import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 // const initialState = {
 //     user: getUser()
 // }
-const incrementBy = createAction('incrementBy')
+// const incrementBy = createAction('incrementBy')
 
 export const loginAction = (data) => {
     return async (dispatch) => {
@@ -26,6 +26,20 @@ export const loginAction = (data) => {
         }
     }
 }
+
+export const loginThunkAction = createAsyncThunk(`auth/login`, async (form, thunkApi) => {
+    try {
+        const res = await authService.login(form)
+        setToken(res.data)
+        const user = await userService.getProfile()
+        setUser(user.data)
+        thunkApi.fulfillWithValue({ type: SET_USER_ACTION, payload: user.data })
+        // data?.success(user.data)
+        return user.data
+    } catch (err) {
+        return thunkApi.rejectWithValue(err.response.data)
+    }
+})
 
 export const logoutAction = () => {
     return (dispatch) => {
@@ -57,7 +71,9 @@ export const logoutAction = () => {
 export const { name, reducer: authReducer, actions: authActions, caseReducers, getInitialState } = createSlice({
     name: 'auth',
     initialState: () => ({
-        user: getUser()
+        user: getUser(),
+        status: 'idle',
+        error: null
     }),
     reducers: {
         setUser: (state, action) => {
@@ -68,8 +84,24 @@ export const { name, reducer: authReducer, actions: authActions, caseReducers, g
         }
     },
     extraReducers: (builder) => {
+        builder.addCase(loginThunkAction.pending, (state) => {
+            state.status = 'pending'
+        })
+
+        builder.addCase(loginThunkAction.fulfilled, (state, action) => {
+            state.user = action.payload
+            state.status = 'fulfilled'
+        })
+
+        builder.addCase(loginThunkAction.rejected, (state, action) => {
+            state.error = action.payload
+            state.status = 'error'
+        })
     }
 })
+
+
+
 
 
 // name = 'auth'

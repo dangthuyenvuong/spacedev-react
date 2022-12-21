@@ -37,20 +37,27 @@ export default function Signin() {
     const { state } = useLocation()
 
     const login = useCallback(async (data) => {
-        return new Promise((resolve) => {
-            dispatch(loginAction({
-                data,
-                success: () => {
-                    message.success('Đăng nhập tài khoản thành công')
-                },
-                final: () => {
-                    resolve()
-                },
-                error: (err) => {
-                    handleError(err)
-                }
-            }))
-        })
+        const res = dispatch(loginAction({
+            data,
+            success: () => {
+                message.success('Đăng nhập tài khoản thành công')
+            },
+            final: () => {
+                resolve()
+            },
+            error: (err) => {
+                handleError(err)
+            }
+        }))
+        console.log(res);
+        // dispatch(loginAction(data)).unwrap()
+        // .then(res => {
+        //     console.log(res)
+        //     message.success('Đăng nhập tài khoản thành công')
+        // })
+        // .catch(err => {
+        //     handleError(err)
+        // })
 
 
         // try {
