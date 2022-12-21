@@ -1,4 +1,4 @@
-import { getUser, setToken, setUser } from "@/utils/token"
+import { clearToken, clearUser, getUser, setToken, setUser } from "@/utils/token"
 import { LOGOUT_ACTION, SET_USER_ACTION } from "./action"
 import { authService } from "@/services/auth.service"
 import { userService } from "@/services/user.service"
@@ -23,6 +23,14 @@ export const loginAction = (data) => {
         } finally {
             data?.final()
         }
+    }
+}
+
+export const logoutAction = () => {
+    return (dispatch) => {
+        dispatch({ type: LOGOUT_ACTION })
+        clearToken()
+        clearUser()
     }
 }
 

@@ -89,7 +89,7 @@ export default function Register() {
     }
 
     return (
-        <main className="register-course">
+        <div className="register-course">
             <section>
 
                 {
@@ -149,7 +149,7 @@ export default function Register() {
             </section>
 
 
-        </main>
+        </div>
     )
 }
 

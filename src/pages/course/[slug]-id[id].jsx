@@ -51,7 +51,7 @@ export default function CourseDetail() {
 
     if (loading) {
         return (
-            <main className="course-detail" >
+            <div className="course-detail" >
                 <section className="banner style2" style={{ '--background': '#cde6fb' }}>
                     <div className="container">
                         <div className="info">
@@ -72,14 +72,14 @@ export default function CourseDetail() {
                         </div>
                     </div>
                 </section >
-            </main >
+            </div >
         )
     }
 
     if (!detail) return <Page404 />
 
     return (
-        <main className="course-detail" id="main">
+        <div className="course-detail">
             <section className="banner style2" style={{ '--background': detail.template_color_banner || '#dce6fb' }}>
                 <div className="container">
                     <div className="info">
@@ -172,6 +172,6 @@ export default function CourseDetail() {
                     </div>
                 </div>
             </section>
-        </main >
+        </div >
     )
 }
