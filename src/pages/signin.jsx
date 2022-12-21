@@ -38,7 +38,7 @@ export default function Signin() {
 
     const login = useCallback(async (data) => {
         return new Promise((resolve) => {
-            dispatch(loginAction({
+            const res = dispatch(loginAction({
                 data,
                 success: () => {
                     message.success('Đăng nhập tài khoản thành công')
@@ -50,6 +50,7 @@ export default function Signin() {
                     handleError(err)
                 }
             }))
+            console.log('login', res)
         })
 
 
