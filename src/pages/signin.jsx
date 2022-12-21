@@ -15,6 +15,7 @@ import { SET_USER_ACTION } from '@/stores/action'
 import { userService } from '@/services/user.service'
 import { handleError } from '@/utils/handleError'
 import { useCallback } from 'react'
+import { loginAction } from '@/stores/authReducer'
 
 
 /**
@@ -33,22 +34,25 @@ import { useCallback } from 'react'
 export default function Signin() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const {state} = useLocation()
+    const { state } = useLocation()
 
     const login = useCallback(async (data) => {
-        try {
-            const res = await authService.login(data)
-            setToken(res.data)
-            const user = await userService.getProfile()
-            setUser(user.data)
-            dispatch({ type: SET_USER_ACTION, payload: user.data })
-            message.success('Đăng nhập tài khoản thành công')
-            if(state?.redirect) {
-                navigate(state.redirect)
-            }
-        } catch (err) {
-            handleError(err)
-        }
+        const res = dispatch(loginAction(data))
+        console.log(res);
+
+        // try {
+        //     const res = await authService.login(data)
+        //     setToken(res.data)
+        //     const user = await userService.getProfile()
+        //     setUser(user.data)
+
+        //     message.success('Đăng nhập tài khoản thành công')
+        //     if (state?.redirect) {
+        //         navigate(state.redirect)
+        //     }
+        // } catch (err) {
+        //     handleError(err)
+        // }
     }, [])
     // const { login, } = useAuth()
     const { excute: loginService, loading } = useAsync(login)

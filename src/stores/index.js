@@ -9,6 +9,26 @@ const logMiddleware = store => next => action => {
     next(action)
 }
 
+
+const thunk = store => next => action => {
+    console.log('thunk', action)
+    if(typeof action === 'function') {
+        return action(store.dispatch)
+        
+    }
+
+    next(action)
+}
+
+// const logMiddleware2 = store => next => action => {
+//     console.log('logMiddleware2', store.getState(), action)
+//     next(action)
+// }
+// const logMiddleware3 = store => next => action => {
+//     console.log('logMiddleware3', store.getState(), action)
+//     next(action)
+// }
+
 // Gôm nhiều reducer lại thành 1, mỗi reducer phân biệt với nhau bởi tên của reducer
 const reducers = combineReducers({
     count: countReducer,
@@ -16,7 +36,7 @@ const reducers = combineReducers({
 })
 
 // Tạo một redux store
-export const store = createStore(reducers, applyMiddleware(logMiddleware))
+export const store = createStore(reducers, applyMiddleware(logMiddleware, thunk))
 
 
 // Lắng nghe sự thay đổi của state, thực hiện callback khi state có thay đổi
