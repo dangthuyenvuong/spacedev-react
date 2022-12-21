@@ -37,8 +37,21 @@ export default function Signin() {
     const { state } = useLocation()
 
     const login = useCallback(async (data) => {
-        const res = dispatch(loginAction(data))
-        console.log(res);
+        return new Promise((resolve) => {
+            dispatch(loginAction({
+                data,
+                success: () => {
+                    message.success('Đăng nhập tài khoản thành công')
+                },
+                final: () => {
+                    resolve()
+                },
+                error: (err) => {
+                    handleError(err)
+                }
+            }))
+        })
+
 
         // try {
         //     const res = await authService.login(data)
@@ -68,7 +81,7 @@ export default function Signin() {
     })
     const _onLogin = async () => {
         if (form.validate()) {
-            await loginService(form.values)
+            loginService(form.values)
         }
 
     }

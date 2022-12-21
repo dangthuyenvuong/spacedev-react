@@ -12,15 +12,16 @@ const initialState = {
 export const loginAction = (data) => {
     return async (dispatch) => {
         try {
-            const res = await authService.login(data)
+            const res = await authService.login(data.data)
             setToken(res.data)
             const user = await userService.getProfile()
             setUser(user.data)
             dispatch({ type: SET_USER_ACTION, payload: user.data })
-            
             return user.data
         } catch (err) {
-            handleError(err)
+            data?.error(err)
+        } finally {
+            data?.final()
         }
     }
 }
