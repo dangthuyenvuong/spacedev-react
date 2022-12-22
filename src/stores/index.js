@@ -41,11 +41,11 @@ const reducers = combineReducers({
 
 
 // Tạo một redux store
-// export const store = configureStore({
-//     reducer: reducers,
-//     middleware: (getDefaultMiddlware) => getDefaultMiddlware().concat(logMiddleware),
-//     devTools: ENV === 'development'
-// })
+export const store = configureStore({
+    reducer: reducers,
+    middleware: (getDefaultMiddlware) => getDefaultMiddlware().concat(logMiddleware),
+    devTools: ENV === 'development'
+})
 
 
 // Lắng nghe sự thay đổi của state, thực hiện callback khi state có thay đổi

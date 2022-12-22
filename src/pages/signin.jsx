@@ -15,7 +15,7 @@ import { SET_USER_ACTION } from '@/stores/action'
 import { userService } from '@/services/user.service'
 import { handleError } from '@/utils/handleError'
 import { useCallback } from 'react'
-import { loginAction } from '@/stores/authReducer'
+import { loginAction, loginThunkAction } from '@/stores/authReducer'
 
 
 /**
@@ -37,27 +37,26 @@ export default function Signin() {
     const { state } = useLocation()
 
     const login = useCallback(async (data) => {
-        const res = dispatch(loginAction({
-            data,
-            success: () => {
-                message.success('Đăng nhập tài khoản thành công')
-            },
-            final: () => {
-                resolve()
-            },
-            error: (err) => {
-                handleError(err)
-            }
-        }))
-        console.log(res);
-        // dispatch(loginAction(data)).unwrap()
-        // .then(res => {
-        //     console.log(res)
-        //     message.success('Đăng nhập tài khoản thành công')
-        // })
-        // .catch(err => {
-        //     handleError(err)
-        // })
+        // const res = dispatch(loginAction({
+        //     data,
+        //     success: () => {
+        //         message.success('Đăng nhập tài khoản thành công')
+        //     },
+        //     final: () => {
+        //         resolve()
+        //     },
+        //     error: (err) => {
+        //         handleError(err)
+        //     }
+        // }))
+        // console.log(res);
+        try {
+            await dispatch(loginThunkAction(data)).unwrap()
+            message.success('Đăng nhập tài khoản thành công')
+        } catch (err) {
+            handleError(err)
+        }
+
 
 
         // try {
