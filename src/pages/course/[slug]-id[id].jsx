@@ -13,6 +13,7 @@ import moment from 'moment'
 import { Teacher } from '../../components/Teacher'
 import Page404 from '../404'
 import { useMemo } from 'react'
+import { useQuery } from '@/hooks/useQuery'
 
 
 
@@ -32,10 +33,18 @@ export default function CourseDetail() {
     useScrollTop([id])
 
 
-    const { data: detail, loading } = useFetch(() => courseService.getCourseDetail(id), [id])
+    // const { data: detail, loading } = useFetch(() => courseService.getCourseDetail(id), [id])
+    const { data: detail, loading } = useQuery({
+        queryFn: () => courseService.getCourseDetail(id),
+        queryKey: `course-${id}`,
+        storeDriver: 'sessionStorage'
+    })
 
-    const { data: related = [], loading: relatedLoading } = useFetch(() => courseService.getRelated(id), [id])
-    console.log('re-render')
+    const { data: related = [], loading: relatedLoading } = useQuery({
+        queryFn: () => courseService.getRelated(id),
+        queryKey: `course-related-${id}`,
+        storeDriver: 'sessionStorage'
+    })
 
     const { openingTime, registerPath } = useMemo(() => {
         console.log('useMemo')
@@ -51,7 +60,7 @@ export default function CourseDetail() {
 
     if (loading) {
         return (
-            <main className="course-detail" >
+            <div className="course-detail" >
                 <section className="banner style2" style={{ '--background': '#cde6fb' }}>
                     <div className="container">
                         <div className="info">
@@ -72,14 +81,14 @@ export default function CourseDetail() {
                         </div>
                     </div>
                 </section >
-            </main >
+            </div >
         )
     }
 
     if (!detail) return <Page404 />
 
     return (
-        <main className="course-detail" id="main">
+        <div className="course-detail">
             <section className="banner style2" style={{ '--background': detail.template_color_banner || '#dce6fb' }}>
                 <div className="container">
                     <div className="info">
@@ -172,6 +181,6 @@ export default function CourseDetail() {
                     </div>
                 </div>
             </section>
-        </main >
+        </div >
     )
 }
