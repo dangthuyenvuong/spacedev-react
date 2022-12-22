@@ -1,14 +1,25 @@
-import { cache } from "@/utils/cache"
+import { localStorageCache, sessionStorageCache, indexDBCache } from "@/utils/cache"
 import { useEffect, useRef, useState } from "react"
 
+const _cache = {
+    localStorage: localStorageCache,
+    sessionStorage: sessionStorageCache,
+    indexDB: indexDBCache
+}
 
 
 export const useQuery = (options = {}) => {
-    const { queryFn, queryKey, dependencyList = [], enabled = true, cacheTime} = options
+    const { queryFn,
+        queryKey,
+        dependencyList = [],
+        enabled = true,
+        cacheTime,
+        storeDriver = 'localStorage' } = options
+    const cache = _cache[storeDriver]
 
     const fetchTimes = useRef(0)
     const [data, setData] = useState(() => {
-        if(queryKey) {
+        if (queryKey) {
             return cache.get(queryKey)
         }
     })
@@ -17,7 +28,7 @@ export const useQuery = (options = {}) => {
     const [status, setStatus] = useState('idle')
 
     useEffect(() => {
-        if(!data) {
+        if (enabled && !data) {
             fetchData()
         }
     }, [])
