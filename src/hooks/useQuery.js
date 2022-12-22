@@ -1,10 +1,9 @@
-import { localStorageCache, sessionStorageCache, indexDBCache } from "@/utils/cache"
-import { useEffect, useRef, useState } from "react"
+import { localStorageCache, sessionStorageCache } from "@/utils/cache"
+import { useEffect, useState } from "react"
 
 const _cache = {
     localStorage: localStorageCache,
     sessionStorage: sessionStorageCache,
-    indexDB: indexDBCache
 }
 
 
@@ -17,40 +16,46 @@ export const useQuery = (options = {}) => {
         storeDriver = 'localStorage' } = options
     const cache = _cache[storeDriver]
 
-    const fetchTimes = useRef(0)
-    const [data, setData] = useState(() => {
-        if (queryKey) {
-            return cache.get(queryKey)
-        }
-    })
-    const [loading, setLoading] = useState(false)
+    const [data, setData] = useState()
+    const [loading, setLoading] = useState(true)
     const [error, setError] = useState()
     const [status, setStatus] = useState('idle')
 
     useEffect(() => {
-        if (enabled && !data) {
+        if (enabled) {
             fetchData()
         }
-    }, [])
-
-    useEffect(() => {
-        if (enabled && fetchTimes.current > 1) {
-            fetchData()
-        }
-    }, dependencyList)
-
+    }, [queryKey, enabled].concat(...dependencyList))
 
     const fetchData = async () => {
-        fetchTimes.current++
         try {
             setLoading(true)
             setStatus('pending')
-            const res = await queryFn()
-            setData(res.data)
-            setStatus('success')
 
-            if (queryKey && cacheTime) {
-                cache.set(queryKey, res.data, Date.now() + cacheTime)
+            let res
+            // Kiểm tra cache xem có dữ liệu hay không
+            if (queryKey) {
+                res = cache.get(queryKey)
+                if (res) {
+                    res = { data: res }
+                }
+            }
+
+            if (!res) {
+                res = await queryFn()
+            }
+
+            setStatus('success')
+            setData(res.data)
+
+
+            // update lại thời gian expired trong trường hợp cache đã tồn tại
+            if (queryKey) {
+                let expired = cacheTime
+                if (cacheTime) {
+                    expired += Date.now()
+                }
+                cache.set(queryKey, res.data, expired)
             }
         } catch (err) {
             setError(err)
