@@ -6,7 +6,7 @@ import { courseService } from '../../services/course.service'
 
 export default function Course() {
 
-    const { data = [], loading, } = useQuery({
+    const { data: { data = [] } = {}, loading, } = useQuery({
         queryKey: 'courses',
         cacheTime: 10000,
         queryFn: () => courseService.getCourse()
