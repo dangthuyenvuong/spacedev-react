@@ -37,7 +37,7 @@ export default function CourseDetail() {
     const { data: detail, loading } = useQuery({
         queryFn: () => courseService.getCourseDetail(id),
         queryKey: `course-${id}`,
-        storeDriver: 'sessionStorage'
+        storeDriver: 'sessionStorage',
     })
 
     const { data: related = [], loading: relatedLoading } = useQuery({
