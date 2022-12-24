@@ -1,4 +1,6 @@
 import { localStorageCache, sessionStorageCache } from "@/utils/cache"
+import { useRef } from "react"
+import { useMemo } from "react"
 import { useEffect, useState } from "react"
 
 const _cache = {
@@ -15,11 +17,17 @@ export const useQuery = (options = {}) => {
         cacheTime,
         storeDriver = 'localStorage' } = options
     const cache = _cache[storeDriver]
+    const refetchRef = useRef()
 
     const [data, setData] = useState()
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState()
     const [status, setStatus] = useState('idle')
+    useEffect(() => {
+        if(typeof refetchRef.current === 'boolean') {
+            refetchRef.current = true
+        }
+    }, dependencyList)
 
     useEffect(() => {
         if (enabled) {
@@ -34,11 +42,8 @@ export const useQuery = (options = {}) => {
 
             let res
             // Kiểm tra cache xem có dữ liệu hay không
-            if (queryKey) {
+            if (queryKey && !refetchRef.current) {
                 res = cache.get(queryKey)
-                if (res) {
-                    res = { data: res }
-                }
             }
 
             if (!res) {
@@ -46,7 +51,7 @@ export const useQuery = (options = {}) => {
             }
 
             setStatus('success')
-            setData(res.data)
+            setData(res)
 
 
             // update lại thời gian expired trong trường hợp cache đã tồn tại
@@ -55,8 +60,10 @@ export const useQuery = (options = {}) => {
                 if (cacheTime) {
                     expired += Date.now()
                 }
-                cache.set(queryKey, res.data, expired)
+                cache.set(queryKey, res, expired)
             }
+
+            refetchRef.current = false
         } catch (err) {
             setError(err)
             setStatus('error')
