@@ -44,9 +44,6 @@ export const useQuery = (options = {}) => {
             // Kiểm tra cache xem có dữ liệu hay không
             if (queryKey && !refetchRef.current) {
                 res = cache.get(queryKey)
-                if (res) {
-                    res = { data: res }
-                }
             }
 
             if (!res) {
@@ -54,7 +51,7 @@ export const useQuery = (options = {}) => {
             }
 
             setStatus('success')
-            setData(res.data)
+            setData(res)
 
 
             // update lại thời gian expired trong trường hợp cache đã tồn tại
@@ -63,7 +60,7 @@ export const useQuery = (options = {}) => {
                 if (cacheTime) {
                     expired += Date.now()
                 }
-                cache.set(queryKey, res.data, expired)
+                cache.set(queryKey, res, expired)
             }
 
             refetchRef.current = false

@@ -34,16 +34,17 @@ export default function CourseDetail() {
 
 
     // const { data: detail, loading } = useFetch(() => courseService.getCourseDetail(id), [id])
-    const { data: detail, loading } = useQuery({
+    const { data: { data: detail } = {}, loading } = useQuery({
         queryFn: () => courseService.getCourseDetail(id),
         queryKey: `course-${id}`,
         storeDriver: 'sessionStorage',
     })
 
-    const { data: related = [], loading: relatedLoading } = useQuery({
+    const { data: { detail: related = [] } = {}, loading: relatedLoading } = useQuery({
         queryFn: () => courseService.getRelated(id),
         queryKey: `course-related-${id}`,
-        storeDriver: 'sessionStorage'
+        storeDriver: 'sessionStorage',
+        enabled: !!detail
     })
 
     const { openingTime, registerPath } = useMemo(() => {
