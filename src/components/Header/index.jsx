@@ -29,8 +29,11 @@ export default function Header() {
 
 
     const logout = () => {
-        dispatch(logoutAction())
-        message.success('Đăng xuất tài khoản thành công')
+        dispatch(logoutAction({
+            success: () => {
+                message.success('Bạn đã đang xuất thành công')
+            }
+        }))
     }
 
     return (

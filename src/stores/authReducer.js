@@ -26,30 +26,24 @@ export const loginAction = (data) => {
     }
 }
 
-export const logoutAction = () => {
+export const logoutAction = (data) => {
     return (dispatch) => {
-        dispatch({ type: LOGOUT_ACTION })
         clearToken()
         clearUser()
+        dispatch({ type: LOGOUT_ACTION })
+        data?.success()
     }
 }
 
-
+export const setUserAction = (data) => ({
+    type: SET_USER_ACTION,
+    payload: data
+})
 
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOGOUT_ACTION:
-            return {
-                ...state,
-                user: null
-            }
-
-        case SET_USER_ACTION:
-            return {
-                ...state,
-                user: action.payload
-            }
-
+        case LOGOUT_ACTION: return { user: null }
+        case SET_USER_ACTION: return { user: action.payload }
         default: return state
     }
 }
