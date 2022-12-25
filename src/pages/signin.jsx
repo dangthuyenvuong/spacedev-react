@@ -15,6 +15,7 @@ import { SET_USER_ACTION } from '@/stores/action'
 import { userService } from '@/services/user.service'
 import { handleError } from '@/utils/handleError'
 import { useCallback } from 'react'
+import { setUserAction } from '@/stores/authReducer'
 
 
 /**
@@ -41,7 +42,7 @@ export default function Signin() {
             setToken(res.data)
             const user = await userService.getProfile()
             setUser(user.data)
-            dispatch({ type: SET_USER_ACTION, payload: user.data })
+            dispatch(setUserAction(user.data))
             message.success('Đăng nhập tài khoản thành công')
             if(state?.redirect) {
                 navigate(state.redirect)
