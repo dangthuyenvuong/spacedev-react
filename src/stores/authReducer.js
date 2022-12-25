@@ -12,7 +12,7 @@ const initialState = {
 export const loginAction = (data) => {
     return async (dispatch) => {
         try {
-            const res = await authService.login(data.data)
+            const res = await authService.login(data.form)
             setToken(res.data)
             const user = await userService.getProfile()
             setUser(user.data)

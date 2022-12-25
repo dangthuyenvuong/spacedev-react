@@ -15,7 +15,7 @@ import { SET_USER_ACTION } from '@/stores/action'
 import { userService } from '@/services/user.service'
 import { handleError } from '@/utils/handleError'
 import { useCallback } from 'react'
-import { setUserAction } from '@/stores/authReducer'
+import { loginAction, setUserAction } from '@/stores/authReducer'
 
 
 /**
@@ -33,23 +33,42 @@ import { setUserAction } from '@/stores/authReducer'
 
 export default function Signin() {
     const dispatch = useDispatch()
-    const {state} = useLocation()
+    const { state } = useLocation()
     const navigate = useNavigate()
 
     const login = useCallback(async (data) => {
-        try {
-            const res = await authService.login(data)
-            setToken(res.data)
-            const user = await userService.getProfile()
-            setUser(user.data)
-            dispatch(setUserAction(user.data))
-            message.success('Đăng nhập tài khoản thành công')
-            if(state?.redirect) {
-                navigate(state.redirect)
-            }
-        } catch (err) {
-            handleError(err)
-        }
+        return new Promise((resolve) => {
+            const res = dispatch(loginAction({
+                form: data,
+                success: (user) => {
+                    message.success('Đăng nhập tài khoản thành công')
+                    if (state?.redirect) {
+                        navigate(state.redirect)
+                    }
+                },
+                error: (err) => {
+                    handleError(err)
+                },
+                finally: () => {
+                    resolve()
+                }
+            }))
+
+            console.log('login', res)
+        })
+        // try {
+        //     const res = await authService.login(data)
+        //     setToken(res.data)
+        //     const user = await userService.getProfile()
+        //     setUser(user.data)
+        //     dispatch(setUserAction(user.data))
+        //     message.success('Đăng nhập tài khoản thành công')
+        //     if(state?.redirect) {
+        //         navigate(state.redirect)
+        //     }
+        // } catch (err) {
+        //     handleError(err)
+        // }
     }, [])
     // const { login, } = useAuth()
     const { excute: loginService, loading } = useAsync(login)
