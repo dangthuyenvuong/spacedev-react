@@ -8,7 +8,7 @@ export default function Course() {
 
     const { data = [], loading, } = useQuery({
         queryKey: 'courses',
-        cacheTime: 3600000,
+        cacheTime: 10000,
         queryFn: () => courseService.getCourse()
     })
 
