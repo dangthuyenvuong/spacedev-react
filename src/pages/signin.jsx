@@ -33,8 +33,8 @@ import { setUserAction } from '@/stores/authReducer'
 
 export default function Signin() {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const {state} = useLocation()
+    const navigate = useNavigate()
 
     const login = useCallback(async (data) => {
         try {

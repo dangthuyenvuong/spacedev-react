@@ -7,7 +7,7 @@ const initialState = {
 
 export const setUserAction = (data) => ({
     type: SET_USER_ACTION,
-    paylaod: data
+    payload: data
 })
 
 export const logoutAction = () => {
