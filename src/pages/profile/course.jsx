@@ -5,8 +5,14 @@ import Skeleton from '../../components/Skeleton'
 import moment from 'moment/moment'
 import { generatePath, Link } from 'react-router-dom'
 import { PATH } from '../../config/path'
+import { useQuery } from '@/hooks/useQuery'
 export default function MyCourse() {
-    const { loading, data: courses } = useFetch(() => courseService.getMyCourse())
+    const { data: { data: courses = [] } = {} } = useQuery({
+        queryFn: () => courseService.getMyCourse(),
+        queryKey: 'course-list',
+        cacheTime: 10000
+    })
+    // const { loading, data: courses } = useFetch(() => courseService.getMyCourse())
 
     if (loading) return <>
         {

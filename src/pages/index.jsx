@@ -12,7 +12,7 @@ export default function Home() {
     // const [courses, setCourses] = useState([])
     // const [loading, setLoading] = useState(false)
     const [isOpenVideoModal, setIsOpenVideoModal] = useState(false)
-    const { data: courses = [], loading, } = useQuery({
+    const { data: { data: courses = [] } = {}, loading, } = useQuery({
         queryKey: 'course-index',
         cacheTime: 10000,
         queryFn: () => courseService.getCourse('?limit=6')
