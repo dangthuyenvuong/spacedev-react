@@ -8,6 +8,7 @@ import { LOGOUT_ACTION } from '@/stores/action'
 import { useAuth } from '@/hooks/useAuth'
 import { message } from 'antd'
 import { clearToken, clearUser } from '@/utils/token'
+import { logoutAction } from '@/stores/authReducer'
 
 
 export default function Header() {
@@ -28,10 +29,7 @@ export default function Header() {
 
 
     const logout = () => {
-        dispatch({ type: LOGOUT_ACTION })
-        clearToken()
-        clearUser()
-        message.success('Đăng xuất tài khoản thành công')
+        dispatch(logoutAction())
     }
 
     return (
