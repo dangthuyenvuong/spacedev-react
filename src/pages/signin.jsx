@@ -38,39 +38,41 @@ export default function Signin() {
     const { state } = useLocation()
 
     const login = useCallback(async (data) => {
-        // const res = dispatch(loginAction({
-        //     data,
-        //     success: () => {
-        //         message.success('Đăng nhập tài khoản thành công')
-        //     },
-        //     final: () => {
-        //         resolve()
-        //     },
-        //     error: (err) => {
-        //         handleError(err)
-        //     }
-        // }))
-        // console.log(res);
         try {
-            // const user = await dispatch(loginThunkAction(data)).unwrap()
-            const res = await dispatch(loginThunkAction(data))
-            let user = unwrapResult(res)
+            const user = await dispatch(loginThunkAction(data)).unwrap()
+            console.log('login', user)
             message.success(`Chào mừng ${user.name} đã quay trở lại`)
-
-        } catch (err) {
+        }catch(err) {
             handleError(err)
         }
 
+        // return new Promise((resolve) => {
+        //     const res = dispatch(loginAction({
+        //         form: data,
+        //         success: (user) => {
+        //             message.success('Đăng nhập tài khoản thành công')
+        //             if (state?.redirect) {
+        //                 navigate(state.redirect)
+        //             }
+        //         },
+        //         error: (err) => {
+        //             handleError(err)
+        //         },
+        //         finally: () => {
+        //             resolve()
+        //         }
+        //     }))
 
-
+        //     console.log('login', res)
+        // })
         // try {
         //     const res = await authService.login(data)
         //     setToken(res.data)
         //     const user = await userService.getProfile()
         //     setUser(user.data)
-
+        //     dispatch(setUserAction(user.data))
         //     message.success('Đăng nhập tài khoản thành công')
-        //     if (state?.redirect) {
+        //     if(state?.redirect) {
         //         navigate(state.redirect)
         //     }
         // } catch (err) {
