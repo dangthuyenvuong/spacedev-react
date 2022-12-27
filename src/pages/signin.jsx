@@ -16,6 +16,7 @@ import { userService } from '@/services/user.service'
 import { handleError } from '@/utils/handleError'
 import { useCallback } from 'react'
 import { loginAction, loginThunkAction } from '@/stores/authReducer'
+import { unwrapResult } from '@reduxjs/toolkit'
 
 
 /**
@@ -51,8 +52,11 @@ export default function Signin() {
         // }))
         // console.log(res);
         try {
-            await dispatch(loginThunkAction(data)).unwrap()
-            message.success('Đăng nhập tài khoản thành công')
+            // const user = await dispatch(loginThunkAction(data)).unwrap()
+            const res = await dispatch(loginThunkAction(data))
+            let user = unwrapResult(res)
+            message.success(`Chào mừng ${user.name} đã quay trở lại`)
+
         } catch (err) {
             handleError(err)
         }
