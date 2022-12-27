@@ -13,6 +13,7 @@ import moment from 'moment'
 import { Teacher } from '../../components/Teacher'
 import Page404 from '../404'
 import { useMemo } from 'react'
+import { useQuery } from '@/hooks/useQuery'
 
 
 
@@ -32,10 +33,19 @@ export default function CourseDetail() {
     useScrollTop([id])
 
 
-    const { data: detail, loading } = useFetch(() => courseService.getCourseDetail(id), [id])
+    // const { data: detail, loading } = useFetch(() => courseService.getCourseDetail(id), [id])
+    const { data: { data: detail } = {}, loading } = useQuery({
+        queryFn: () => courseService.getCourseDetail(id),
+        queryKey: `course-${id}`,
+        storeDriver: 'sessionStorage',
+    })
 
-    const { data: related = [], loading: relatedLoading } = useFetch(() => courseService.getRelated(id), [id])
-    console.log('re-render')
+    const { data: { detail: related = [] } = {}, loading: relatedLoading } = useQuery({
+        queryFn: () => courseService.getRelated(id),
+        queryKey: `course-related-${id}`,
+        storeDriver: 'sessionStorage',
+        enabled: !!detail
+    })
 
     const { openingTime, registerPath } = useMemo(() => {
         console.log('useMemo')

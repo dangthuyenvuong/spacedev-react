@@ -42,7 +42,10 @@ const reducers = combineReducers({
 
 // Tạo một redux store
 export const store = configureStore({
-    reducer: reducers,
+    reducer: {
+        count: countReducer,
+        auth: authReducer
+    },
     middleware: (getDefaultMiddlware) => getDefaultMiddlware().concat(logMiddleware),
     devTools: ENV === 'development'
 })

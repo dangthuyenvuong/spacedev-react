@@ -33,11 +33,11 @@ export const loginThunkAction = createAsyncThunk(`auth/login`, async (form, thun
         setToken(res.data)
         const user = await userService.getProfile()
         setUser(user.data)
-        thunkApi.fulfillWithValue({ type: SET_USER_ACTION, payload: user.data })
+        // thunkApi.fulfillWithValue({ type: SET_USER_ACTION, payload: user.data })
         // data?.success(user.data)
         return user.data
     } catch (err) {
-        return thunkApi.rejectWithValue(err.response.data)
+        throw err.response.data
     }
 })
 
